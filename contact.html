@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Luthfi Aulia Hakim</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-coffee: #1E1B18; --dark-walnut: #2C2621; --old-library-brown: #3A322C;
+            --antique-gold: #C6A969; --aged-brass: #B89A5A; --vintage-beige: #E6D5B8;
+            --burgundy: #7A2E2E; --warm-white: #F5F5F5; --soft-beige: #E8E0D0; --muted-gray: #A8A29E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { background-color: var(--deep-coffee); color: var(--soft-beige); font-family: 'Inter', sans-serif; line-height: 1.6; overflow: hidden; }
+        h2, h3, .logo { font-family: 'Playfair Display', serif; color: var(--warm-white); }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        .cursor-dot {
+            width: 12px; height: 12px; background-color: var(--antique-gold);
+            border-radius: 50%; position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+
+        header {
+            position: fixed; top: 0; width: 100%; padding: 2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(30, 27, 24, 0.95); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid var(--old-library-brown);
+        }
+        .logo { font-size: 1.5rem; color: var(--antique-gold); letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav ul li a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--vintage-beige); position: relative; padding-bottom: 5px; }
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 0; background-color: var(--antique-gold); transition: width 0.3s ease; }
+        nav ul li a:hover, nav ul li a.active { color: var(--antique-gold); }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+
+        section { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 10%; animation: fadeIn 1.2s ease-out; }
+        
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .contact-text h2 { font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.1; }
+        .contact-text h2 span { color: var(--antique-gold); font-style: italic; }
+        .contact-text p { font-size: 1.1rem; color: var(--muted-gray); margin-bottom: 2rem; }
+
+        .contact-list { display: flex; flex-direction: column; gap: 2rem; }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--burgundy);
+            padding-left: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover { border-left: 3px solid var(--antique-gold); padding-left: 2rem; }
+
+        .label { font-size: 0.8rem; text-transform: uppercase; color: var(--antique-gold); letter-spacing: 2px; margin-bottom: 0.5rem; }
+        .value { font-size: 1.2rem; color: var(--warm-white); font-family: 'Playfair Display', serif; }
+        .value a:hover { color: var(--antique-gold); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+            .contact-text h2 { font-size: 2.5rem; }
+            .contact-item { border-left: none; border-bottom: 1px solid var(--old-library-brown); padding-bottom: 1rem; padding-left: 0; align-items: center; }
+            .contact-item:hover { padding-left: 0; border-bottom: 1px solid var(--antique-gold); }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <header>
+        <div class="logo">LAH.</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="hoverable">Home</a></li>
+                <li><a href="about.html" class="hoverable">About</a></li>
+                <li><a href="skills.html" class="hoverable">Skills</a></li>
+                <li><a href="projects.html" class="hoverable">Projects</a></li>
+                <li><a href="experience.html" class="hoverable">Experience</a></li>
+                <li><a href="certifications.html" class="hoverable">Certifications</a></li>
+                <li><a href="blogs.html" class="hoverable">Blogs</a></li>
+                <li><a href="contact.html" class="active hoverable">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact">
+            <div class="contact-wrapper">
+                <div class="contact-text">
+                    <h2>Let's <span>Connect</span> & Collaborate.</h2>
+                    <p>Whether you're interested in spatial analysis, project management, or exploring energy industry dynamics, my door is always open for quiet but insightful discussions.</p>
+                </div>
+
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <span class="label">Write to me</span>
+                        <span class="value"><a href="mailto:hkmluthfi04@gmail.com" class="hoverable">hkmluthfi04@gmail.com</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="label">Professional Network</span>
+                        <span class="value"><a href="https://www.linkedin.com/in/luthfiauliahakim" target="_blank" class="hoverable">linkedin.com/in/luthfiauliahakim</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="label">Location</span>
+                        <span class="value">Bandung, Indonesia</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="label">WhatsApp</span>
+                        <span class="value"><a href="https://wa.me/6282286816995" class="hoverable">+62 822-8681-6995</a></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const dot = document.getElementById('cursor-dot');
+        const hoverables = document.querySelectorAll('.hoverable, a');
+
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = `${e.clientX}px`; 
+            dot.style.top = `${e.clientY}px`;
+        });
+
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(3.5)';
+                dot.style.backgroundColor = 'rgba(198, 169, 105, 0.4)';
+            });
+            el.addEventListener('mouseleave', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                dot.style.backgroundColor = 'var(--antique-gold)';
+            });
+        });
+    </script>
+</body>
+</html>

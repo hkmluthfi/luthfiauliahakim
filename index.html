@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luthfi Aulia Hakim | Home</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-coffee: #1E1B18;
+            --dark-walnut: #2C2621;
+            --old-library-brown: #3A322C;
+            --antique-gold: #C6A969;
+            --aged-brass: #B89A5A;
+            --vintage-beige: #E6D5B8;
+            --dusty-parchment: #F1E6D0;
+            --burgundy: #7A2E2E;
+            --warm-white: #F5F5F5;
+            --soft-beige: #E8E0D0;
+            --muted-gray: #A8A29E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body {
+            background-color: var(--deep-coffee);
+            color: var(--soft-beige);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; 
+        }
+        h1, .logo { font-family: 'Playfair Display', serif; color: var(--warm-white); }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- SIMPLIFIED CUSTOM CURSOR --- */
+        .cursor-dot {
+            width: 12px; height: 12px; background-color: var(--antique-gold);
+            border-radius: 50%; position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+        }
+        .logo { font-size: 1.5rem; color: var(--antique-gold); letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav ul li a {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--vintage-beige); position: relative; padding-bottom: 5px;
+        }
+        nav ul li a::after {
+            content: ''; position: absolute; width: 0; height: 1px;
+            bottom: 0; left: 0; background-color: var(--antique-gold); transition: width 0.3s ease;
+        }
+        nav ul li a:hover { color: var(--antique-gold); }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 0 5%; animation: fadeIn 1.5s ease-out forwards;
+        }
+        .greeting { font-size: 1rem; color: var(--vintage-beige); text-transform: uppercase; margin-bottom: 1rem; }
+        .hero h1 { font-size: 4.5rem; margin-bottom: 1rem; }
+        .hero h1 span { color: var(--antique-gold); font-style: italic; }
+        .typewriter-container { font-size: 1.2rem; color: var(--muted-gray); margin-bottom: 2.5rem; height: 30px; }
+        .typing-text { color: var(--dusty-parchment); border-right: 2px solid var(--antique-gold); padding-right: 5px; }
+
+        .btn-group { display: flex; gap: 1.5rem; }
+        .btn { padding: 0.8rem 2rem; font-size: 0.9rem; text-transform: uppercase; border-radius: 2px; transition: all 0.3s; }
+        .btn-primary { background-color: var(--antique-gold); color: var(--deep-coffee); }
+        .btn-primary:hover { background-color: var(--aged-brass); box-shadow: 0 4px 15px rgba(198, 169, 105, 0.2); }
+        .btn-secondary { background-color: transparent; color: var(--vintage-beige); border: 1px solid var(--vintage-beige); }
+        .btn-secondary:hover { border-color: var(--antique-gold); color: var(--antique-gold); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <header>
+        <div class="logo">LAH.</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active hoverable">Home</a></li>
+                <li><a href="about.html" class="hoverable">About</a></li>
+                <li><a href="skills.html" class="hoverable">Skills</a></li>
+                <li><a href="projects.html" class="hoverable">Projects</a></li>
+                <li><a href="experiences.html" class="hoverable">Experience</a></li>
+                <li><a href="certifications.html" class="hoverable">Certifications</a></li>
+                <li><a href="blogs.html" class="hoverable">Blogs</a></li>
+                <li><a href="contact.html" class="hoverable">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <p class="greeting">Welcome</p>
+            <h1>I am <span>Luthfi Aulia Hakim</span></h1>
+            <div class="typewriter-container">
+                I am a <span class="typing-text"></span>
+            </div>
+            <div class="btn-group">
+                <a href="experience.html" class="btn btn-primary hoverable">View Experiences</a>
+                <a href="contact.html" class="btn btn-secondary hoverable">Contact Me</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simplified Cursor Logic
+        const dot = document.getElementById('cursor-dot');
+        const hoverables = document.querySelectorAll('.hoverable, a, .btn');
+
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = `${e.clientX}px`; 
+            dot.style.top = `${e.clientY}px`;
+        });
+
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(3.5)';
+                dot.style.backgroundColor = 'rgba(198, 169, 105, 0.4)';
+            });
+            el.addEventListener('mouseleave', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                dot.style.backgroundColor = 'var(--antique-gold)';
+            });
+        });
+
+        // Typewriter Effect
+        const typingText = document.querySelector('.typing-text');
+        const words = ['Geodesy & Geomatics Student', 'GIS & Project Management', 'Oil & Gas Enthusiast', 'Quiet Observer'];
+        let wordIdx = 0, charIdx = 0, isDel = false;
+
+        function type() {
+            const current = words[wordIdx];
+            typingText.textContent = isDel ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
+            charIdx = isDel ? charIdx - 1 : charIdx + 1;
+            let speed = isDel ? 50 : 100;
+
+            if (!isDel && charIdx === current.length) { isDel = true; speed = 2000; }
+            else if (isDel && charIdx === 0) { isDel = false; wordIdx = (wordIdx + 1) % words.length; speed = 500; }
+            setTimeout(type, speed);
+        }
+        document.addEventListener('DOMContentLoaded', () => setTimeout(type, 1000));
+    </script>
+</body>
+</html>

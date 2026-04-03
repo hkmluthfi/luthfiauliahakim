@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Luthfi Aulia Hakim</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-coffee: #1E1B18;
+            --dark-walnut: #2C2621;
+            --old-library-brown: #3A322C;
+            --antique-gold: #C6A969;
+            --aged-brass: #B89A5A;
+            --vintage-beige: #E6D5B8;
+            --burgundy: #7A2E2E;
+            --warm-white: #F5F5F5;
+            --soft-beige: #E8E0D0;
+            --muted-gray: #A8A29E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body {
+            background-color: var(--dark-walnut);
+            color: var(--soft-beige);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h2, h3, .logo { font-family: 'Playfair Display', serif; color: var(--warm-white); }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- SIMPLIFIED CUSTOM CURSOR --- */
+        .cursor-dot {
+            width: 12px; height: 12px; background-color: var(--antique-gold);
+            border-radius: 50%; position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(44, 38, 33, 0.95); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid var(--old-library-brown);
+        }
+        .logo { font-size: 1.5rem; color: var(--antique-gold); letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav ul li a {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--vintage-beige); position: relative; padding-bottom: 5px;
+        }
+        nav ul li a::after {
+            content: ''; position: absolute; width: 0; height: 1px;
+            bottom: 0; left: 0; background-color: var(--antique-gold); transition: width 0.3s ease;
+        }
+        nav ul li a:hover { color: var(--antique-gold); }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+
+        /* --- ABOUT CONTENT --- */
+        section { min-height: 100vh; padding: 10rem 10% 5rem; display: flex; align-items: center; }
+        .about-container {
+            display: flex; align-items: flex-start; gap: 5rem; max-width: 1200px; margin: 0 auto;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        /* Image Frame */
+        .image-frame {
+            width: 320px; height: 420px; border: 1px solid var(--antique-gold);
+            padding: 10px; position: relative; flex-shrink: 0; top: 20px;
+        }
+        .image-frame::before {
+            content: ''; position: absolute; top: -10px; left: -10px;
+            width: 50px; height: 50px; border-top: 2px solid var(--burgundy); border-left: 2px solid var(--burgundy);
+            transition: all 0.3s ease;
+        }
+        .image-frame::after {
+            content: ''; position: absolute; bottom: -10px; right: -10px;
+            width: 50px; height: 50px; border-bottom: 2px solid var(--burgundy); border-right: 2px solid var(--burgundy);
+            transition: all 0.3s ease;
+        }
+        .image-inner { width: 100%; height: 100%; background: var(--deep-coffee); overflow: hidden; }
+        .image-inner img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
+        .image-frame:hover img { filter: grayscale(0); transform: scale(1.05); }
+        .image-frame:hover::before { top: -15px; left: -15px; }
+        .image-frame:hover::after { bottom: -15px; right: -15px; }
+
+        /* Text Content */
+        .about-content { flex: 1; }
+        .section-title { font-size: 2.5rem; color: var(--antique-gold); margin-bottom: 2rem; }
+        .about-content p { font-size: 1.05rem; margin-bottom: 1.2rem; text-align: justify; color: var(--soft-beige); }
+        .about-content p:first-of-type::first-letter {
+            font-family: 'Playfair Display', serif; font-size: 3.5rem; float: left;
+            margin-right: 8px; line-height: 0.8; color: var(--antique-gold);
+        }
+
+        /* --- INTERACTIVE INTERESTS GRID --- */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .interest-card {
+            border: 1px solid var(--old-library-brown);
+            padding: 1.5rem;
+            border-radius: 2px;
+            background: rgba(30, 27, 24, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interest-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 3px; height: 100%; background-color: var(--burgundy);
+            transform: scaleY(0); transform-origin: bottom; transition: transform 0.4s ease;
+        }
+
+        .interest-card:hover {
+            border-color: var(--antique-gold);
+            background: var(--deep-coffee);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .interest-card:hover::before { transform: scaleY(1); }
+
+        .interest-card h3 {
+            font-size: 1.1rem; color: var(--antique-gold);
+            margin-bottom: 0.5rem; letter-spacing: 0.5px;
+        }
+
+        .interest-card p.card-desc {
+            font-size: 0.85rem !important; color: var(--muted-gray) !important;
+            margin-bottom: 0 !important; text-align: left !important; line-height: 1.4;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 992px) {
+            .about-container { flex-direction: column; text-align: center; align-items: center; }
+            .about-content p { text-align: left; }
+            section { padding-top: 8rem; }
+            nav ul { display: none; /* Hide full menu on mobile for now */ }
+        }
+        @media (max-width: 600px) {
+            .interests-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <header>
+        <div class="logo">LAH.</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="hoverable">Home</a></li>
+                <li><a href="about.html" class="active hoverable">About</a></li>
+                <li><a href="skills.html" class="hoverable">Skills</a></li>
+                <li><a href="projects.html" class="hoverable">Projects</a></li>
+                <li><a href="experiences.html" class="hoverable">Experience</a></li>
+                <li><a href="certifications.html" class="hoverable">Certifications</a></li>
+                <li><a href="blogs.html" class="hoverable">Blogs</a></li>
+                <li><a href="contact.html" class="hoverable">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="about-container">
+                <div class="image-frame hoverable">
+                    <div class="image-inner">
+                        <img src="gambardiri.png" alt="Luthfi Aulia Hakim">
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <h2 class="section-title">About Me</h2>
+                    <p>
+                        I am an observer by nature. While others speak, I listen—to people, to environments, and to data. As a final-year Geodesy and Geomatics Engineering student at Institut Teknologi Bandung (ITB), with an enriching academic exchange at Universiti Teknologi Malaysia (UTM), I channel this quiet focus into the meticulous world of spatial analysis.
+                    </p>
+                    <p>
+                        My work revolves around translating real-world physical environments into actionable insights. During my time as a Field Operation Intern at PT Anugerah Samudera Madanindo, I gained firsthand experience observing survey operations and how massive port development projects are executed at Patimban Port. I find beauty in precision, clarity, and the structured coordination required within complex systems.
+                    </p>
+                    <p>
+                        Looking ahead, I am passionate about bringing spatial intelligence and structured coordination into dynamic industries. Here are the core sectors and disciplines I am actively expanding my expertise in:
+                    </p>
+
+                    <div class="interests-grid">
+                        <div class="interest-card hoverable">
+                            <h3>Geographic Info System</h3>
+                            <p class="card-desc">Translating complex spatial data into clear, interactive digital maps.</p>
+                        </div>
+                        <div class="interest-card hoverable">
+                            <h3>Project Management</h3>
+                            <p class="card-desc">Ensuring strategic coordination, efficiency, and structured execution.</p>
+                        </div>
+                        <div class="interest-card hoverable">
+                            <h3>Oil & Gas Sector</h3>
+                            <p class="card-desc">Applying geospatial intelligence to optimize energy industry operations.</p>
+                        </div>
+                        <div class="interest-card hoverable">
+                            <h3>Banking Industry</h3>
+                            <p class="card-desc">Leveraging analytical thinking for data-driven financial insights.</p>
+                        </div>
+                        <div class="interest-card hoverable">
+                            <h3>Hydrography</h3>
+                            <p class="card-desc">Conducting marine surveys and mapping underwater topography for coastal development.</p>
+                        </div>
+                        <div class="interest-card hoverable">
+                            <h3>Land Surveying</h3>
+                            <p class="card-desc">Acquiring precise terrestrial spatial data to support infrastructure and land management.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simplified Cursor Logic
+        const dot = document.getElementById('cursor-dot');
+        const hoverables = document.querySelectorAll('.hoverable, a, .image-frame');
+
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = `${e.clientX}px`; 
+            dot.style.top = `${e.clientY}px`;
+        });
+
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(3.5)';
+                dot.style.backgroundColor = 'rgba(198, 169, 105, 0.4)';
+            });
+            el.addEventListener('mouseleave', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                dot.style.backgroundColor = 'var(--antique-gold)';
+            });
+        });
+    </script>
+</body>
+</html>

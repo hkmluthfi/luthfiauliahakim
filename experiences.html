@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Luthfi Aulia Hakim</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-coffee: #1E1B18; --dark-walnut: #2C2621; --old-library-brown: #3A322C;
+            --antique-gold: #C6A969; --aged-brass: #B89A5A; --vintage-beige: #E6D5B8;
+            --burgundy: #7A2E2E; --warm-white: #F5F5F5; --soft-beige: #E8E0D0; --muted-gray: #A8A29E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { background-color: var(--dark-walnut); color: var(--soft-beige); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+        h2, h3, h4, h5, .logo { font-family: 'Playfair Display', serif; color: var(--warm-white); }
+        a { text-decoration: none; color: inherit; }
+
+        .cursor-dot {
+            width: 12px; height: 12px; background-color: var(--antique-gold); border-radius: 50%;
+            position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+
+        header {
+            position: fixed; top: 0; width: 100%; padding: 2rem 5%; display: flex; justify-content: space-between;
+            align-items: center; background: rgba(44, 38, 33, 0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--old-library-brown);
+        }
+        .logo { font-size: 1.5rem; color: var(--antique-gold); letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav ul li a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--vintage-beige); position: relative; padding-bottom: 5px; }
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 0; background-color: var(--antique-gold); transition: width 0.3s ease; }
+        nav ul li a:hover, nav ul li a.active { color: var(--antique-gold); }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+
+        section { padding: 10rem 10% 5rem; min-height: 100vh; animation: fadeIn 1.2s ease-out; }
+        .section-title { font-size: 2.5rem; color: var(--antique-gold); margin-bottom: 3rem; text-align: center; }
+        
+        .experience-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
+
+        /* --- ACCORDION DETAILS & SUMMARY --- */
+        details.exp-dropdown {
+            background-color: var(--deep-coffee);
+            border: 1px solid var(--old-library-brown);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        details.exp-dropdown[open] { border-color: var(--antique-gold); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        summary {
+            padding: 1.5rem 2rem; font-family: 'Playfair Display', serif; font-size: 1.5rem;
+            color: var(--vintage-beige); font-weight: 600; background-color: rgba(44, 38, 33, 0.5);
+            list-style: none; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s;
+        }
+        
+        summary::-webkit-details-marker { display: none; } /* Hide default arrow */
+        summary:hover { background-color: var(--old-library-brown); color: var(--antique-gold); }
+
+        /* Custom Toggle Icon */
+        .toggle-icon { font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 300; color: var(--burgundy); transition: transform 0.3s; }
+        details[open] summary .toggle-icon { transform: rotate(45deg); color: var(--antique-gold); }
+
+        /* --- DROPDOWN CONTENT --- */
+        .dropdown-content { padding: 2rem; border-top: 1px solid var(--old-library-brown); }
+
+        .org-group { margin-bottom: 3rem; }
+        .org-group:last-child { margin-bottom: 0; }
+        
+        .org-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(198, 169, 105, 0.2); padding-bottom: 0.5rem; }
+        .org-header h3 { font-size: 1.5rem; color: var(--vintage-beige); }
+        .org-duration { font-size: 0.9rem; color: var(--muted-gray); font-style: italic; }
+
+        /* Internal Timeline within Organization/Education */
+        .role-list { border-left: 2px solid var(--burgundy); padding-left: 1.5rem; margin-left: 0.5rem; display: flex; flex-direction: column; gap: 2rem; }
+        
+        .role-item { position: relative; }
+        .role-item::before {
+            content: ''; position: absolute; left: -1.95rem; top: 6px; width: 10px; height: 10px;
+            background-color: var(--antique-gold); border-radius: 50%; box-shadow: 0 0 0 4px var(--deep-coffee); transition: 0.3s;
+        }
+        .role-item:hover::before { background-color: var(--burgundy); transform: scale(1.3); }
+
+        .role-header { display: flex; flex-direction: column; margin-bottom: 0.5rem; }
+        .role-title { font-size: 1.1rem; color: var(--warm-white); font-weight: 500; margin-bottom: 0.2rem; }
+        .role-meta { font-size: 0.85rem; color: var(--muted-gray); font-family: 'Inter', sans-serif; }
+        .role-location { display: block; color: var(--aged-brass); margin-top: 0.2rem; font-size: 0.8rem; }
+        
+        .role-item p { font-size: 0.95rem; color: var(--soft-beige); text-align: justify; margin-top: 0.5rem; line-height: 1.5; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            summary { font-size: 1.2rem; padding: 1.2rem; }
+            .org-header { flex-direction: column; gap: 0.5rem; }
+            section { padding-top: 8rem; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <header>
+        <div class="logo">LAH.</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="hoverable">Home</a></li>
+                <li><a href="about.html" class="hoverable">About</a></li>
+                <li><a href="skills.html" class="hoverable">Skills</a></li>
+                <li><a href="projects.html" class="hoverable">Projects</a></li>
+                <li><a href="experiences.html" class="active hoverable">Experience</a></li>
+                <li><a href="certifications.html" class="hoverable">Certifications</a></li>
+                <li><a href="blogs.html" class="hoverable">Blogs</a></li>
+                <li><a href="contact.html" class="hoverable">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="experience">
+            <h2 class="section-title">Academic & Professional Journey</h2>
+            
+            <div class="experience-container">
+                
+                <details class="exp-dropdown" open>
+                    <summary class="hoverable">Education <span class="toggle-icon">+</span></summary>
+                    <div class="dropdown-content">
+                        
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>Institut Teknologi Bandung (ITB)</h3>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Bachelor of Geodesy and Geomatics Engineering</div>
+                                        <div class="role-meta">Aug 2022 - Aug 2026 (Expected) · GPA: 3.09/4.00</div>
+                                        <span class="role-location">Bandung, Indonesia</span>
+                                    </div>
+                                    <p>Actively involved in organizations such as IMG ITB, UKMR ITB, and the Ministry of Secretarial Kabinet KM ITB, alongside participating in various academic and student committees.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>Universiti Teknologi Malaysia (UTM)</h3>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Student Exchange in Geomatics Engineering</div>
+                                        <div class="role-meta">Sep 2025 - Feb 2026 · GPA: 3.42/4.00</div>
+                                        <span class="role-location">Johor Bahru, Malaysia</span>
+                                    </div>
+                                    <p>Completed relevant coursework including Dimensional Control Survey, Terrestrial Laser Scanning (TLS), Photogrammetry, and Tidal Processing and Analysis. Actively participated in various international community events and programs.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </details>
+
+                <details class="exp-dropdown" open>
+                    <summary class="hoverable">Professional Experiences <span class="toggle-icon">+</span></summary>
+                    <div class="dropdown-content">
+                        
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>PT Anugerah Samudera Madanindo</h3>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Field Operation Intern</div>
+                                        <div class="role-meta">Jan 2025 - Feb 2025 · 2 mos</div>
+                                        <span class="role-location">Patimban Port · On-site</span>
+                                    </div>
+                                    <p>Assisted and observed survey operations for the Patimban Port project, a major national development, where I conducted seawall profiling using the stakeout method with an ETS based on the provided plan. I also processed survey data using AutoCAD Civil 3D, including cross-section analysis, ensuring accurate representation of the surveyed area. Additionally, I performed MBES surveys onboard a survey vessel using Teledyne PDS to gather high-precision bathymetric data. To further contribute to the project and company, I delivered presentations on potential improvements to enhance efficiency and effectiveness in survey operations.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </details>
+
+                <details class="exp-dropdown">
+                    <summary class="hoverable">Organizational Experiences <span class="toggle-icon">+</span></summary>
+                    <div class="dropdown-content">
+                        
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>Ikatan Mahasiswa Geodesi ITB (IMG ITB)</h3>
+                                <span class="org-duration">2 yrs 8 mos</span>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Staff of Professional Education Department</div>
+                                        <div class="role-meta">Aug 2024 - May 2025 · 10 mos</div>
+                                    </div>
+                                    <p>Responsible for providing members of IMG ITB with career insights by organizing events, preparing presentation materials for speakers, and managing event operations. I also contributed to a program that showcased alumni by producing videos of their daily activities in their workplaces.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Secretarial Staff - Wisuda Oktober 2024</div>
+                                        <div class="role-meta">Sep 2024 - Oct 2024 · 2 mos</div>
+                                    </div>
+                                    <p>Responsible for recording meeting minutes, assisting the main secretary in organizing and managing documentation, and ensuring all administrative tasks were completed effectively to support the success of the event.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Publication and Documentation Staff - De Jingga 2024</div>
+                                        <div class="role-meta">Aug 2024 - Sep 2024 · 2 mos</div>
+                                    </div>
+                                    <p>Served as the event photographer, capturing moments throughout the event, from the pre-event preparations and the main event activities to the closing ceremony.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Staff Of Secretarial Department</div>
+                                        <div class="role-meta">Oct 2023 - May 2024 · 8 mos</div>
+                                    </div>
+                                    <p>Handled minute-taking duties in coordination with the Medkominfo division and events organized by IMG ITB. Ensured accurate and comprehensive records for both meetings and events.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Senatorial Secretary General Staff</div>
+                                        <div class="role-meta">Oct 2023 - May 2024 · 8 mos</div>
+                                    </div>
+                                    <p>Primary responsibilities included evaluating members of the Senate at IMG ITB. Managed assessment processes and provided support for the overall evaluation of senator performance.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Accommodation and Transportation Staff - CFD 2023</div>
+                                        <div class="role-meta">Nov 2023 - Dec 2023 · 2 mos</div>
+                                    </div>
+                                    <p>Sourced venues for the CFD 2023 event and managed participant transportation data. Coordinated venue arrangements and ensured accurate records of transportation logistics to facilitate a successful event.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Member</div>
+                                        <div class="role-meta">Sep 2023 - Present · 2 yrs 8 mos</div>
+                                    </div>
+                                    <p>Actively participated in various activities under IMG ITB and developed strong communication and collaboration skills with fellow members.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>Geopoint IMG-ITB</h3>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Staff of Secretarial Division 2024</div>
+                                        <div class="role-meta">Aug 2024 - Nov 2024 · 4 mos</div>
+                                    </div>
+                                    <p>I was responsible for recording and preparing minutes for organizational meetings, supporting socialization forums, documenting key discussions, and distributing the minutes.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>UKMR ITB</h3>
+                                <span class="org-duration">1 yr 7 mos</span>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Human Resource Staff 2023/2024</div>
+                                        <div class="role-meta">Nov 2023 - Jun 2024 · 8 mos</div>
+                                    </div>
+                                    <p>Managed member data for UKMR ITB, including tracking birthdays and providing congratulations and recognition for members who are graduating or have graduated.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Design Staff - ITBJTR 2024</div>
+                                        <div class="role-meta">Dec 2023 - Jan 2024 · 2 mos</div>
+                                    </div>
+                                    <p>Supported the Head of Design Division in creating the grand design for ITBJTR 2024 and addressed graphic needs for other divisions. Worked with Figma to develop and implement design elements, ensuring all visual requirements were met.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Treasurer - PPAB UKMR 2023</div>
+                                        <div class="role-meta">Oct 2023 - Nov 2023 · 2 mos</div>
+                                    </div>
+                                    <p>Managed financial records and transactions for PPAB UKMR 2023, ensuring accurate budgeting and reporting of expenses.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Publication and Documentation - OHU UKMR 2023</div>
+                                        <div class="role-meta">Jun 2023 - Sep 2023 · 4 mos</div>
+                                    </div>
+                                    <p>Handled publication and documentation tasks during the OHU UKMR 2023 event, ensuring all activities were effectively recorded and communicated.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Human Resources 2022/2023 Internship</div>
+                                        <div class="role-meta">Dec 2022 - Sep 2023 · 10 mos</div>
+                                        <span class="role-location">Bandung, West Java, Indonesia</span>
+                                    </div>
+                                    <p>Responsible for sending birthday greetings and assisting in creating recognition materials for graduates. This role involved maintaining a positive relationship with members and supporting the celebration of their achievements.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Publication and Documentation - UKMR 2023 Election</div>
+                                        <div class="role-meta">Feb 2023 - Jul 2023 · 6 mos</div>
+                                        <span class="role-location">Bandung, West Java, Indonesia</span>
+                                    </div>
+                                    <p>Handled publication and documentation tasks for the UKMR 2023 Election, including graphic design responsibilities. Ensured effective communication and presentation of election materials through both written documentation and visual graphics.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Logistics Staff ITBJTR 2023</div>
+                                        <div class="role-meta">Dec 2022 - Jan 2023 · 2 mos</div>
+                                    </div>
+                                    <p>Handled all logistical aspects for ITBJTR 2023, from procuring items for the event to managing on-site operations. Responsibilities included transporting and arranging items on stage during seminars and ensuring smooth logistics throughout the event.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>Kabinet KM ITB</h3>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Staff - Ministry of Secretarial 2023/2024</div>
+                                        <div class="role-meta">Oct 2023 - May 2024 · 8 mos</div>
+                                        <span class="role-location">Bandung, West Java, Indonesia</span>
+                                    </div>
+                                    <p>In my role as Staff in the Ministry of Secretarial, I was involved in the Archival and Household Affairs Directorate (Kedirjenan PBRT). My primary responsibilities included managing the archiving of documents from various ministries within KM ITB, ensuring accurate and organized record-keeping. Additionally, I was in charge of coordinating the reservation of secretariat rooms and overseeing the usage of secretariat equipment.</p>
+                                </div>
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Intern - Ministry of Secretarial 2022/2023</div>
+                                        <div class="role-meta">Nov 2022 - Apr 2023 · 6 mos</div>
+                                        <span class="role-location">Bandung, West Java, Indonesia</span>
+                                    </div>
+                                    <p>As an intern, I gained insights into the various functions and responsibilities within the Ministry of Secretarial, enhancing my understanding of administrative processes and organizational support.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>ITBMUN</h3>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Secretary - ITBMUN 2023</div>
+                                        <div class="role-meta">Jan 2023 - Jun 2023 · 6 mos</div>
+                                        <span class="role-location">Bandung, West Java, Indonesia</span>
+                                    </div>
+                                    <p>Assisted the Head Secretary in drafting proposals, contributing to the planning and organization of the ITBMUN 2023 conference. English as a Second Language (ESL).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="org-group">
+                            <div class="org-header">
+                                <h3>FITB ITB 2022</h3>
+                            </div>
+                            <div class="role-list">
+                                <div class="role-item">
+                                    <div class="role-header">
+                                        <div class="role-title">Secretary - Pemilihan Ketua Angkatan FITB ITB 2022</div>
+                                        <div class="role-meta">Oct 2022 · 1 mo</div>
+                                    </div>
+                                    <p>As Secretary, I documented minutes for all committee meetings, ensuring clear and accurate records to support effective communication and transparency during the election process.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </details>
+
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const dot = document.getElementById('cursor-dot');
+        const hoverables = document.querySelectorAll('.hoverable, a, summary');
+
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = `${e.clientX}px`; dot.style.top = `${e.clientY}px`;
+        });
+
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(3.5)';
+                dot.style.backgroundColor = 'rgba(198, 169, 105, 0.4)';
+            });
+            el.addEventListener('mouseleave', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                dot.style.backgroundColor = 'var(--antique-gold)';
+            });
+        });
+    </script>
+</body>
+</html>

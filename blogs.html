@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs | Luthfi Aulia Hakim</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-coffee: #1E1B18; --dark-walnut: #2C2621; --old-library-brown: #3A322C;
+            --antique-gold: #C6A969; --aged-brass: #B89A5A; --vintage-beige: #E6D5B8;
+            --burgundy: #7A2E2E; --warm-white: #F5F5F5; --soft-beige: #E8E0D0; --muted-gray: #A8A29E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { background-color: var(--deep-coffee); color: var(--soft-beige); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+        h2, h3, h4, .logo { font-family: 'Playfair Display', serif; color: var(--warm-white); }
+        a { text-decoration: none; color: inherit; }
+
+        .cursor-dot {
+            width: 12px; height: 12px; background-color: var(--antique-gold);
+            border-radius: 50%; position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+
+        header {
+            position: fixed; top: 0; width: 100%; padding: 2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(30, 27, 24, 0.95); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid var(--old-library-brown);
+        }
+        .logo { font-size: 1.5rem; color: var(--antique-gold); letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav ul li a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--vintage-beige); position: relative; padding-bottom: 5px; }
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 0; background-color: var(--antique-gold); transition: width 0.3s ease; }
+        nav ul li a:hover, nav ul li a.active { color: var(--antique-gold); }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+
+        section { padding: 10rem 10% 5rem; min-height: 100vh; animation: fadeIn 1.2s ease-out; }
+        .section-title { font-size: 2.5rem; color: var(--antique-gold); margin-bottom: 3rem; text-align: center; }
+        
+        .blog-container { max-width: 1100px; margin: 0 auto; }
+
+        /* --- BLOG GRID --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        /* --- BLOG CARD (Polaroid Style) --- */
+        .blog-card {
+            background-color: var(--dark-walnut);
+            border: 1px solid var(--old-library-brown);
+            padding: 1.5rem;
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px) rotate(1deg); /* Efek polaroid miring sedikit */
+            border-color: var(--antique-gold);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            z-index: 2;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background-color: var(--deep-coffee);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            border: 1px solid var(--old-library-brown);
+        }
+
+        .blog-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(80%) sepia(30%); transition: 0.5s;
+        }
+        .blog-card:hover .blog-image img { filter: grayscale(0%) sepia(0%); transform: scale(1.05); }
+
+        .blog-date { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--burgundy); letter-spacing: 1px; display: block; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .blog-title { font-size: 1.3rem; color: var(--antique-gold); margin-bottom: 1rem; line-height: 1.3; }
+        .blog-snippet { font-size: 0.95rem; color: var(--muted-gray); margin-bottom: 2rem; text-align: justify; flex-grow: 1; line-height: 1.5; }
+
+        .btn-read {
+            align-self: flex-start; background: transparent; border: 1px solid var(--antique-gold);
+            color: var(--antique-gold); padding: 0.6rem 1.5rem; font-family: 'Inter', sans-serif;
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s;
+        }
+        .btn-read:hover { background: var(--antique-gold); color: var(--deep-coffee); }
+
+        /* --- MODAL (POP-UP) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(30, 27, 24, 0.85); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; z-index: 2000; transition: all 0.4s ease;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-content {
+            background-color: var(--dark-walnut);
+            border: 2px solid var(--old-library-brown);
+            width: 90%; max-width: 800px; max-height: 85vh;
+            overflow-y: auto; padding: 3rem 4rem;
+            position: relative; border-radius: 4px;
+            transform: translateY(50px) scale(0.95); transition: all 0.4s ease;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+
+        .close-btn {
+            position: absolute; top: 1.5rem; right: 2rem; font-size: 2rem;
+            color: var(--muted-gray); transition: 0.3s; line-height: 1;
+        }
+        .close-btn:hover { color: var(--burgundy); transform: rotate(90deg); }
+
+        /* Modal Typography */
+        .modal-header { margin-bottom: 2rem; border-bottom: 1px solid var(--old-library-brown); padding-bottom: 1.5rem; text-align: center; }
+        .modal-title { font-size: 2.2rem; color: var(--antique-gold); margin-bottom: 0.5rem; }
+        .modal-date { font-size: 0.9rem; color: var(--burgundy); letter-spacing: 2px; text-transform: uppercase; }
+        
+        .modal-body p { font-size: 1.05rem; color: var(--soft-beige); margin-bottom: 1.5rem; text-align: justify; line-height: 1.8; }
+        .modal-body h4 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--vintage-beige); margin: 2.5rem 0 1rem; }
+        .modal-body img { width: 100%; border: 1px solid var(--old-library-brown); margin: 1.5rem 0; filter: sepia(20%); }
+
+        /* Custom Scrollbar for Modal */
+        .modal-content::-webkit-scrollbar { width: 8px; }
+        .modal-content::-webkit-scrollbar-track { background: var(--deep-coffee); }
+        .modal-content::-webkit-scrollbar-thumb { background: var(--old-library-brown); border-radius: 4px; }
+        .modal-content::-webkit-scrollbar-thumb:hover { background: var(--antique-gold); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .modal-content { padding: 2rem 1.5rem; width: 95%; }
+            .modal-title { font-size: 1.8rem; }
+            section { padding-top: 8rem; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <header>
+        <div class="logo">LAH.</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="hoverable">Home</a></li>
+                <li><a href="about.html" class="hoverable">About</a></li>
+                <li><a href="skills.html" class="hoverable">Skills</a></li>
+                <li><a href="projects.html" class="hoverable">Projects</a></li>
+                <li><a href="experiences.html" class="hoverable">Experience</a></li>
+                <li><a href="certifications.html" class="hoverable">Certifications</a></li>
+                <li><a href="blogs.html" class="active hoverable">Blogs</a></li>
+                <li><a href="contact.html" class="hoverable">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="blogs">
+            <h2 class="section-title">The Travelogue Archives</h2>
+            
+            <div class="blog-container">
+                <div class="blog-grid">
+                    
+                    <div class="blog-card">
+                        <div class="blog-image hoverable">
+                            <img src="https://via.placeholder.com/400x300/1E1B18/C6A969?text=Seoul+Vibes" alt="Seoul Story">
+                        </div>
+                        <span class="blog-date">Autumn 2025</span>
+                        <h3 class="blog-title">9 Days in Seoul: Medals, Markets, and Memories</h3>
+                        <p class="blog-snippet">Participating in the Seoul International Invention Fair 2025 was more than just a competition. It was an eye-opening 9-day journey into a culture that beautifully blends rapid innovation with deep-rooted traditions.</p>
+                        <button class="btn-read hoverable" data-target="modal-korea">Read Story</button>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image hoverable">
+                            <img src="https://via.placeholder.com/400x300/1E1B18/C6A969?text=Johor+Bahru" alt="UTM Story">
+                        </div>
+                        <span class="blog-date">Feb 2026</span>
+                        <h3 class="blog-title">Cross-Border Learning: My Life at UTM Johor</h3>
+                        <p class="blog-snippet">Living and studying in Malaysia for a semester gave me a fresh perspective. Here is a brief look into my student exchange experience, the diverse community, and the academic culture at Universiti Teknologi Malaysia.</p>
+                        <button class="btn-read hoverable" data-target="modal-utm">Read Story</button>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image hoverable">
+                            <img src="https://via.placeholder.com/400x300/1E1B18/C6A969?text=Port+Survey" alt="Patimban Story">
+                        </div>
+                        <span class="blog-date">Early 2025</span>
+                        <h3 class="blog-title">Lessons from the Field: Patimban Port Internship</h3>
+                        <p class="blog-snippet">Transitioning from classroom theories to the harsh realities of a coastal construction site. My observations on massive port development operations and the critical role of structured coordination.</p>
+                        <button class="btn-read hoverable" data-target="modal-intern">Read Story</button>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image hoverable">
+                            <img src="https://via.placeholder.com/400x300/1E1B18/C6A969?text=Ganesha+Campus" alt="ITB Story">
+                        </div>
+                        <span class="blog-date">2022 - Present</span>
+                        <h3 class="blog-title">The ITB Journey: From Dreams to Reality</h3>
+                        <p class="blog-snippet">Reflecting on the path that led me to Institut Teknologi Bandung. The late-night studying, the pressure, and what it truly means to be a Geodesy and Geomatics engineering student on the Ganesha campus.</p>
+                        <button class="btn-read hoverable" data-target="modal-itb">Read Story</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="modal-korea">
+        <div class="modal-content">
+            <span class="close-btn hoverable">&times;</span>
+            <div class="modal-header">
+                <h3 class="modal-title">9 Days in Seoul: Medals, Markets, and Memories</h3>
+                <span class="modal-date">Seoul International Invention Fair 2025</span>
+            </div>
+            <div class="modal-body">
+                <p>Welcome to my Seoul journal. This trip was a milestone—not just academically, but personally. It was my first time navigating the bustling, neon-lit streets of South Korea.</p>
+                
+                <h4>Day 1-3: The Setup & The Pitch</h4>
+                <p>The first few days were a blur of jet lag and intense preparation. Setting up our booth for the agricultural digital platform at SIIF 2025 required meticulous attention to detail. Presenting our innovation to international judges was nerve-wracking, but relying on clear communication and solid data paid off.</p>
+
+                <h4>Day 4-6: The Reward and Exploring the City</h4>
+                <p>Winning the Bronze Medal was a surreal moment. It validated months of hard work. After the formal events concluded, it was time to observe the city. Walking through Gyeongbokgung Palace and contrasting it with the hyper-modern skyline of Gangnam offered a masterclass in urban planning and cultural preservation.</p>
+
+                <h4>Day 7-9: Culinary Adventures and Farewells</h4>
+                <p>You cannot visit Korea without diving into the food. From authentic Tteokbokki in Myeongdong to late-night K-BBQ, every meal was an experience. Leaving Seoul was bittersweet, but I carried back a medal and a completely renewed perspective on global innovation.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-utm">
+        <div class="modal-content">
+            <span class="close-btn hoverable">&times;</span>
+            <div class="modal-header">
+                <h3 class="modal-title">Cross-Border Learning: My Life at UTM Johor</h3>
+                <span class="modal-date">Student Exchange Semester</span>
+            </div>
+            <div class="modal-body">
+                <p>Stepping into Universiti Teknologi Malaysia (UTM) as an exchange student was both exciting and challenging. The environment in Johor Bahru presented a different rhythm compared to Bandung.</p>
+                <p>Academically, the focus on practical applications in subjects like Terrestrial Laser Scanning and Photogrammetry broadened my technical toolkit. Culturally, collaborating with students from diverse backgrounds taught me invaluable lessons in adaptability and international teamwork. It wasn't just about transferring credits; it was about expanding my worldview.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-intern">
+        <div class="modal-content">
+            <span class="close-btn hoverable">&times;</span>
+            <div class="modal-header">
+                <h3 class="modal-title">Lessons from the Field: Patimban Port Internship</h3>
+                <span class="modal-date">PT Anugerah Samudera Madanindo</span>
+            </div>
+            <div class="modal-body">
+                <p>Classrooms teach you the theory of precision; the field teaches you the reality of execution. My internship at the Patimban Port project was a crash course in large-scale marine construction.</p>
+                <p>Observing seawall profiling and Multibeam Echosounder (MBES) surveys from a vessel revealed the incredible logistical coordination required to manage massive infrastructure projects. As an observer by nature, I found beauty in how structured workflows overcome chaotic environmental variables like tides and weather.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-itb">
+        <div class="modal-content">
+            <span class="close-btn hoverable">&times;</span>
+            <div class="modal-header">
+                <h3 class="modal-title">The ITB Journey: From Dreams to Reality</h3>
+                <span class="modal-date">Ganesha Campus</span>
+            </div>
+            <div class="modal-body">
+                <p>Getting accepted into Institut Teknologi Bandung was the culmination of relentless effort. But the real challenge began on the very first day of classes.</p>
+                <p>Studying Geodesy and Geomatics here has been a rigorous exercise in analytical thinking and discipline. Beyond the heavy academic workload, ITB taught me the value of community through organizations like IMG and UKMR. Every late night spent processing spatial data or preparing for organizational events shaped the professional I am today.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- CUSTOM CURSOR ---
+        const dot = document.getElementById('cursor-dot');
+        const hoverables = document.querySelectorAll('.hoverable, a, .close-btn, button');
+
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = `${e.clientX}px`; 
+            dot.style.top = `${e.clientY}px`;
+        });
+
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(3.5)';
+                dot.style.backgroundColor = 'rgba(198, 169, 105, 0.4)';
+            });
+            el.addEventListener('mouseleave', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                dot.style.backgroundColor = 'var(--antique-gold)';
+            });
+        });
+
+        // --- MODAL POP-UP LOGIC ---
+        const readBtns = document.querySelectorAll('.btn-read');
+        const closeBtns = document.querySelectorAll('.close-btn');
+        const overlays = document.querySelectorAll('.modal-overlay');
+
+        // Open Modal
+        readBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const targetId = btn.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            });
+        });
+
+        // Close Modal via X button
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.closest('.modal-overlay').classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            });
+        });
+
+        // Close Modal via clicking outside the content box
+        overlays.forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if(e.target === overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
