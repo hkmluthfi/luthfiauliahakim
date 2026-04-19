@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment | Luthfi Aulia Hakim</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-coffee: #1E1B18; --dark-walnut: #2C2621; --old-library-brown: #3A322C;
+            --antique-gold: #C6A969; --aged-brass: #B89A5A; --vintage-beige: #E6D5B8;
+            --burgundy: #7A2E2E; --warm-white: #F5F5F5; --soft-beige: #E8E0D0; --muted-gray: #A8A29E;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { background-color: var(--deep-coffee); color: var(--soft-beige); font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden; }
+        h2, h3, h4, .logo { font-family: 'Playfair Display', serif; color: var(--warm-white); }
+        a { text-decoration: none; color: inherit; }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot {
+            width: 12px; height: 12px; background-color: var(--antique-gold); 
+            border-radius: 50%; position: fixed; top: 0; left: 0;
+            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(30, 27, 24, 0.95); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid var(--old-library-brown);
+        }
+        .logo { font-size: 1.5rem; color: var(--antique-gold); letter-spacing: 1px; }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav ul li a { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--vintage-beige); position: relative; padding-bottom: 5px; }
+        nav ul li a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 0; background-color: var(--antique-gold); transition: width 0.3s ease; }
+        nav ul li a:hover, nav ul li a.active { color: var(--antique-gold); }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
+
+        /* --- ASSESSMENT SECTION --- */
+        section { padding: 10rem 10% 5rem; min-height: 100vh; animation: fadeIn 1.2s ease-out; }
+        .section-title { font-size: 2.5rem; color: var(--antique-gold); margin-bottom: 1.5rem; text-align: center; }
+        .assessment-intro { max-width: 850px; margin: 0 auto 4rem; text-align: center; color: var(--muted-gray); font-size: 1rem; line-height: 1.8; border-bottom: 1px solid var(--old-library-brown); padding-bottom: 2rem; }
+
+        .assessment-container { display: flex; flex-direction: column; gap: 3.5rem; max-width: 900px; margin: 0 auto; }
+
+        .assessment-card {
+            background-color: var(--dark-walnut); border: 1px solid var(--old-library-brown);
+            border-radius: 4px; padding: 2.5rem 3rem; transition: all 0.4s ease;
+        }
+        .assessment-card:hover { border-color: var(--antique-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.3); transform: translateY(-5px); }
+
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; border-bottom: 1px solid rgba(198,169,105,0.15); padding-bottom: 1rem; }
+        .card-title { font-size: 1.6rem; color: var(--antique-gold); }
+        
+        .btn-view {
+            background: transparent; border: 1px solid var(--burgundy); color: var(--burgundy);
+            padding: 0.5rem 1.2rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.3s; border-radius: 2px; cursor: pointer;
+        }
+        .btn-view:hover { background: var(--burgundy); color: var(--warm-white); }
+
+        /* 1. Personality Bars */
+        .personality-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+        .p-row { display: grid; grid-template-columns: 160px 1fr 40px; align-items: center; gap: 1.5rem; }
+        .p-label { font-size: 0.95rem; color: var(--muted-gray); font-weight: 500; }
+        .p-bar-bg { width: 100%; height: 10px; background-color: var(--deep-coffee); border-radius: 5px; position: relative; }
+        .p-bar-fill { height: 100%; background: linear-gradient(90deg, var(--burgundy), var(--antique-gold)); border-radius: 5px; }
+        .p-score { font-size: 1rem; color: var(--vintage-beige); text-align: right; font-family: 'Inter', sans-serif; font-weight: 600; }
+
+        /* 2. Future of Work */
+        .fow-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; }
+        .fow-item { display: flex; flex-direction: column; align-items: center; width: 120px; }
+        .fow-chart { position: relative; width: 100px; height: 100px; margin-bottom: 1rem; }
+        .fow-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+        .fow-bg { fill: none; stroke: var(--deep-coffee); stroke-width: 8; }
+        .fow-fill { fill: none; stroke: var(--antique-gold); stroke-width: 8; stroke-linecap: round; }
+        .fow-score { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.2rem; color: var(--warm-white); font-weight: 600; }
+        .fow-label { font-size: 0.85rem; color: var(--muted-gray); text-align: center; font-weight: 500; }
+
+        /* 3. Learning Style */
+        .learning-grid { display: flex; flex-direction: column; gap: 1.8rem; }
+        .ls-row { display: flex; flex-direction: column; gap: 0.5rem; }
+        .ls-header { display: flex; justify-content: space-between; align-items: center; }
+        .ls-title { font-size: 1rem; color: var(--vintage-beige); }
+        .ls-badge { font-size: 0.75rem; padding: 0.2rem 0.8rem; border-radius: 12px; font-weight: 600; text-transform: uppercase; color: var(--warm-white); }
+        .bg-high { background-color: var(--burgundy); }
+        .bg-mod { background-color: var(--aged-brass); }
+        .ls-bar-bg { width: 100%; height: 8px; background-color: var(--deep-coffee); border-radius: 4px; }
+        .ls-bar-fill { height: 100%; border-radius: 4px; position: relative; }
+        .fill-high { background-color: var(--burgundy); }
+        .fill-mod { background-color: var(--aged-brass); }
+        .ls-percentage { position: absolute; right: 0; top: -22px; font-size: 0.8rem; color: var(--muted-gray); }
+
+        /* 4. Cognitive Ability */
+        .cog-grid { display: flex; flex-direction: column; gap: 1.8rem; }
+        .cog-row { display: flex; flex-direction: column; gap: 0.5rem; }
+        .cog-header { display: flex; justify-content: space-between; align-items: center; }
+        .cog-title { font-size: 1rem; color: var(--vintage-beige); }
+        .cog-stats { display: flex; gap: 1rem; align-items: center; }
+        .cog-badge { background-color: var(--burgundy); font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 4px; color: var(--warm-white); text-transform: uppercase; }
+        .cog-score { font-size: 0.9rem; color: var(--antique-gold); font-weight: 600; width: 50px; text-align: right; }
+        .cog-bar-bg { width: 100%; height: 6px; background-color: var(--deep-coffee); border-radius: 3px; }
+        .cog-bar-fill { height: 100%; background-color: var(--antique-gold); border-radius: 3px; }
+
+        /* --- MODALS (TABBED INTERFACE) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 27, 24, 0.95); backdrop-filter: blur(8px);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content {
+            background: var(--dark-walnut); border: 1px solid var(--antique-gold);
+            width: 95%; max-width: 800px; max-height: 85vh; display: flex; flex-direction: column;
+            position: relative; border-radius: 4px; overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        
+        .modal-header-area { padding: 2rem 2rem 0; position: relative; }
+        .close-modal { position: absolute; top: 1.5rem; right: 2rem; font-size: 2.5rem; color: var(--muted-gray); transition: 0.3s; line-height: 1; z-index: 10; cursor: pointer; }
+        .close-modal:hover { color: var(--burgundy); transform: rotate(90deg); }
+        .modal-main-title { font-size: 1.8rem; color: var(--antique-gold); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; }
+
+        /* TABS CSS - FIXED FOR MOUSE DRAGGING */
+        .tab-menu-container {
+            width: 100%; overflow-x: auto; border-bottom: 1px solid var(--old-library-brown);
+            scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab;
+        }
+        .tab-menu-container:active { cursor: grabbing; }
+        .tab-menu-container::-webkit-scrollbar { display: none; }
+        
+        .tab-menu { display: flex; width: max-content; }
+        
+        .tab-btn {
+            flex: 0 0 auto; background: none; border: none; padding: 1rem 1.5rem; font-family: 'Inter', sans-serif;
+            font-size: 0.85rem; font-weight: 500; color: var(--muted-gray); text-transform: uppercase;
+            letter-spacing: 1px; white-space: nowrap; border-bottom: 2px solid transparent; transition: 0.3s;
+            cursor: pointer;
+        }
+        .tab-btn:hover { color: var(--vintage-beige); }
+        .tab-btn.active { color: var(--antique-gold); border-bottom: 2px solid var(--antique-gold); }
+
+        /* TAB CONTENT CSS */
+        .modal-body-area { padding: 2rem; overflow-y: auto; flex-grow: 1; }
+        .modal-body-area::-webkit-scrollbar { width: 6px; }
+        .modal-body-area::-webkit-scrollbar-track { background: var(--deep-coffee); }
+        .modal-body-area::-webkit-scrollbar-thumb { background: var(--old-library-brown); border-radius: 3px; }
+
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+
+        .trait-level { display: inline-block; background-color: var(--aged-brass); color: var(--warm-white); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.5rem; }
+        .trait-level.high { background-color: var(--burgundy); }
+        
+        .trait-desc { font-size: 0.95rem; color: var(--soft-beige); text-align: justify; margin-bottom: 2rem; line-height: 1.7; }
+        
+        .trait-section { margin-bottom: 1.5rem; }
+        .trait-section h4 { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--vintage-beige); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; border-left: 3px solid var(--burgundy); padding-left: 10px; }
+        .trait-section ul { list-style: none; padding-left: 15px; }
+        .trait-section li { position: relative; font-size: 0.9rem; color: var(--muted-gray); margin-bottom: 0.5rem; line-height: 1.5; text-align: justify; }
+        .trait-section li::before { content: '•'; position: absolute; left: -15px; color: var(--antique-gold); }
+        .trait-section p { font-size: 0.9rem; color: var(--muted-gray); line-height: 1.6; text-align: justify; }
+
+        /* Compact List for FOW & Cognitive Details */
+        .fow-list-item { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(58, 50, 44, 0.5); }
+        .fow-list-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .fow-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+        .fow-list-title { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--warm-white); }
+        .fow-list-badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 600; text-transform: uppercase; color: var(--warm-white); }
+        .fow-list-desc { font-size: 0.95rem; color: var(--muted-gray); text-align: justify; line-height: 1.6; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .assessment-card { padding: 1.5rem; }
+            .p-row { grid-template-columns: 1fr; gap: 0.5rem; }
+            .p-score { text-align: left; }
+            .fow-grid { justify-content: space-around; }
+            .modal-content { padding: 0; width: 95%; }
+            .modal-header-area { padding: 1.5rem 1.5rem 0; }
+            .modal-body-area { padding: 1.5rem; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+
+    <header>
+        <div class="logo">LAH.</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="hoverable">Home</a></li>
+                <li><a href="about.html" class="hoverable">About</a></li>
+                <li><a href="skills.html" class="hoverable">Skills</a></li>
+                <li><a href="experiences.html" class="hoverable">Experience</a></li>
+                <li><a href="certifications.html" class="hoverable">Certifications</a></li>
+                <li><a href="assessment.html" class="active hoverable">Assessment</a></li>
+                <li><a href="contact.html" class="hoverable">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="assessment">
+            <h2 class="section-title">Career Readiness Assessment</h2>
+            <p class="assessment-intro">
+                This assessment was conducted using MyNext Talent, a comprehensive platform by TalentCorp Malaysia designed to discover career potential and assess psychometric competencies through the Catalyst Assessment.
+            </p>
+            
+            <div class="assessment-container">
+                
+                <div class="assessment-card hoverable">
+                    <div class="card-header">
+                        <h3 class="card-title">Personality Profile</h3>
+                        <button class="btn-view hoverable" onclick="openModal('modalPersonality')">View Details</button>
+                    </div>
+                    <div class="personality-grid">
+                        <div class="p-row">
+                            <span class="p-label">Openness</span>
+                            <div class="p-bar-bg"><div class="p-bar-fill" style="width: 70%;"></div></div>
+                            <span class="p-score">3.50</span>
+                        </div>
+                        <div class="p-row">
+                            <span class="p-label">Conscientiousness</span>
+                            <div class="p-bar-bg"><div class="p-bar-fill" style="width: 78%;"></div></div>
+                            <span class="p-score">3.90</span>
+                        </div>
+                        <div class="p-row">
+                            <span class="p-label">Extraversion</span>
+                            <div class="p-bar-bg"><div class="p-bar-fill" style="width: 55%;"></div></div>
+                            <span class="p-score">2.75</span>
+                        </div>
+                        <div class="p-row">
+                            <span class="p-label">Agreeableness</span>
+                            <div class="p-bar-bg"><div class="p-bar-fill" style="width: 71%;"></div></div>
+                            <span class="p-score">3.55</span>
+                        </div>
+                        <div class="p-row">
+                            <span class="p-label">Emotional Stability</span>
+                            <div class="p-bar-bg"><div class="p-bar-fill" style="width: 51%;"></div></div>
+                            <span class="p-score">2.55</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assessment-card hoverable">
+                    <div class="card-header">
+                        <h3 class="card-title">The Future of Work</h3>
+                        <button class="btn-view hoverable" onclick="openModal('modalFow')">View Details</button>
+                    </div>
+                    <div class="fow-grid">
+                        <div class="fow-item">
+                            <div class="fow-chart">
+                                <svg class="fow-svg" viewBox="0 0 100 100">
+                                    <circle class="fow-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="fow-fill" cx="50" cy="50" r="40" style="stroke-dasharray: 251; stroke-dashoffset: 67.77; stroke: var(--burgundy);"></circle>
+                                </svg>
+                                <span class="fow-score">73%</span>
+                            </div>
+                            <span class="fow-label">Cognitive</span>
+                        </div>
+                        <div class="fow-item">
+                            <div class="fow-chart">
+                                <svg class="fow-svg" viewBox="0 0 100 100">
+                                    <circle class="fow-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="fow-fill" cx="50" cy="50" r="40" style="stroke-dasharray: 251; stroke-dashoffset: 67.77; stroke: var(--burgundy);"></circle>
+                                </svg>
+                                <span class="fow-score">73%</span>
+                            </div>
+                            <span class="fow-label">Self Leadership</span>
+                        </div>
+                        <div class="fow-item">
+                            <div class="fow-chart">
+                                <svg class="fow-svg" viewBox="0 0 100 100">
+                                    <circle class="fow-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="fow-fill" cx="50" cy="50" r="40" style="stroke-dasharray: 251; stroke-dashoffset: 57.73; stroke: var(--antique-gold);"></circle>
+                                </svg>
+                                <span class="fow-score">77%</span>
+                            </div>
+                            <span class="fow-label">Digital</span>
+                        </div>
+                        <div class="fow-item">
+                            <div class="fow-chart">
+                                <svg class="fow-svg" viewBox="0 0 100 100">
+                                    <circle class="fow-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="fow-fill" cx="50" cy="50" r="40" style="stroke-dasharray: 251; stroke-dashoffset: 85.34; stroke: var(--aged-brass);"></circle>
+                                </svg>
+                                <span class="fow-score">66%</span>
+                            </div>
+                            <span class="fow-label">Interpersonal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assessment-card hoverable">
+                    <div class="card-header">
+                        <h3 class="card-title">Learning Style</h3>
+                        <button class="btn-view hoverable" onclick="openModal('modalLearning')">View Details</button>
+                    </div>
+                    <div class="learning-grid">
+                        <div class="ls-row">
+                            <div class="ls-header"><span class="ls-title">Visual & Kinesthetic</span><span class="ls-badge bg-high">High</span></div>
+                            <div class="ls-bar-bg"><div class="ls-bar-fill fill-high" style="width: 71%;"><span class="ls-percentage">71%</span></div></div>
+                        </div>
+                        <div class="ls-row">
+                            <div class="ls-header"><span class="ls-title">Aural</span><span class="ls-badge bg-mod">Moderate</span></div>
+                            <div class="ls-bar-bg"><div class="ls-bar-fill fill-mod" style="width: 55%;"><span class="ls-percentage">55%</span></div></div>
+                        </div>
+                        <div class="ls-row">
+                            <div class="ls-header"><span class="ls-title">Read/Write</span><span class="ls-badge bg-high">High</span></div>
+                            <div class="ls-bar-bg"><div class="ls-bar-fill fill-high" style="width: 78%;"><span class="ls-percentage">78%</span></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assessment-card hoverable">
+                    <div class="card-header">
+                        <h3 class="card-title">Cognitive Ability</h3>
+                        <button class="btn-view hoverable" onclick="openModal('modalCognitive')">View Details</button>
+                    </div>
+                    <div class="cog-grid">
+                        <div class="cog-row">
+                            <div class="cog-header"><span class="cog-title">Quantitative Knowledge</span><div class="cog-stats"><span class="cog-badge">High</span><span class="cog-score">79.3%</span></div></div>
+                            <div class="cog-bar-bg"><div class="cog-bar-fill" style="width: 79.31%;"></div></div>
+                        </div>
+                        <div class="cog-row">
+                            <div class="cog-header"><span class="cog-title">Comprehensive Knowledge</span><div class="cog-stats"><span class="cog-badge">High</span><span class="cog-score">62.5%</span></div></div>
+                            <div class="cog-bar-bg"><div class="cog-bar-fill" style="width: 62.5%;"></div></div>
+                        </div>
+                        <div class="cog-row">
+                            <div class="cog-header"><span class="cog-title">Visual Reasoning</span><div class="cog-stats"><span class="cog-badge">High</span><span class="cog-score">83.3%</span></div></div>
+                            <div class="cog-bar-bg"><div class="cog-bar-fill" style="width: 83.33%;"></div></div>
+                        </div>
+                        <div class="cog-row">
+                            <div class="cog-header"><span class="cog-title">Fluid Reasoning</span><div class="cog-stats"><span class="cog-badge">High</span><span class="cog-score">75.0%</span></div></div>
+                            <div class="cog-bar-bg"><div class="cog-bar-fill" style="width: 75%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="modalPersonality">
+        <div class="modal-content">
+            <div class="modal-header-area">
+                <span class="close-modal hoverable" onclick="closeModal('modalPersonality')">&times;</span>
+                <h3 class="modal-main-title">Personality Profile</h3>
+                <div class="tab-menu-container" id="tabMenuPers">
+                    <div class="tab-menu">
+                        <button class="tab-btn active" onclick="switchTab(event, 'tab-emotional', 'tabMenuPers')">Emotional Stability</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-extraversion', 'tabMenuPers')">Extraversion</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-openness', 'tabMenuPers')">Openness</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-agreeableness', 'tabMenuPers')">Agreeableness</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-conscientiousness', 'tabMenuPers')">Conscientiousness</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body-area">
+                <div id="tab-emotional" class="tab-content active">
+                    <span class="trait-level">Moderate</span>
+                    <p class="trait-desc">Moderate Emotional Control relates for talents to a moderate ability to keep their emotions steady and under control in response to life experiences. Mainly positive emotions about past, present and future. Overall satisfaction with life. Moderate levels of stress resilience. Some ability to overcome setbacks and disappointments. Psychological resilience.</p>
+                    <div class="trait-section"><h4>Strengths</h4><ul><li>Activities with protected risk and moderate challenge.</li><li>Problem solving.</li><li>Supporting others with lower emotional control.</li></ul></div>
+                    <div class="trait-section"><h4>Vulnerabilities</h4><ul><li>To be anxious in high risk situations.</li><li>To draw back from challenges that would stretch them, but they are capable of doing.</li><li>To be held back by others around them with higher levels of anxiety and lower resilience.</li><li>To underestimate their resilience under pressure.</li></ul></div>
+                    <div class="trait-section"><h4>Advice for Future Work</h4><ul><li>Must not let negative emotions hold them back from attempting new opportunities, such as self-employment.</li><li>Must be aware of the role they have in interfacing between colleagues with high and low emotional control to enable collaboration.</li><li>They could have a supportive role to colleagues who have lower level of emotional control.</li><li>Must be aware of their level of stress tolerance and choose environments where this will not be compromised.</li><li>Value their ability to pick up on risk.</li></ul></div>
+                    <div class="trait-section"><h4>Careers</h4><p>Moderate Emotional Control is valuable in many careers where there are moderate levels of risk and uncertainty. This may include work where they can play a supportive role to senior leadership and management. Self-employment is also a potential career option.</p></div>
+                </div>
+                <div id="tab-extraversion" class="tab-content">
+                    <span class="trait-level">Moderate</span>
+                    <p class="trait-desc">They relate closely to both their external and internal worlds and have characteristics of Extraversion and Introversion. Creative - Adventurous - Imaginative - Think of new ideas - Friendliness - Energetic - Excitement-seeking - Sociable – Outgoing - Take the lead - Content in their own company - A listener - Emotional regulation - Self-reflection.</p>
+                    <div class="trait-section"><h4>Strengths</h4><ul><li>A wide range of work environments.</li><li>A balance between social and solo time.</li></ul></div>
+                    <div class="trait-section"><h4>Vulnerabilities</h4><ul><li>To need a balance between time on their own and time with other people.</li><li>To lose motivation, energy and concentration if the balance swings too far in one direction.</li></ul></div>
+                    <div class="trait-section"><h4>Advice for Future Work</h4><ul><li>Must be aware of when they need to spend time with others or time on their own.</li><li>Must have a strategy for what to do when they realise they need more interaction with either their external world or internal world to function at their best.</li></ul></div>
+                    <div class="trait-section"><h4>Careers</h4><p>Moderate Extraverts have an important role in most careers because they can balance social contexts as well as independent work. They have a special role in interfacing between extravert and introvert colleagues to bring collaboration and unity of purpose.</p></div>
+                </div>
+                <div id="tab-openness" class="tab-content">
+                    <span class="trait-level">Moderate</span>
+                    <p class="trait-desc">Moderate Openness indicates their ability to adapt to routines and their willingness to explore new ideas and experiences. Imaginative – Creative - Individualistic and non-conforming - Intellectually curious - Artistic interests – Adventurous - Broad interests - Express feeling readily - Down to earth – Conventional - Balance between familiarity and novelty - Conforming.</p>
+                    <div class="trait-section"><h4>Strengths</h4><ul><li>Being open-minded to new ideas and experiences.</li><li>Learning new skills or knowledge.</li><li>Seeing things from different perspectives.</li><li>Completing tasks and following procedures.</li></ul></div>
+                    <div class="trait-section"><h4>Vulnerabilities</h4><ul><li>To be content to follow routines and established procedures and miss opportunities to gain new experiences and knowledge or contribute creative ideas in work.</li><li>To remain in a role that does not provide opportunities to be creative and explore new ideas and experiences.</li></ul></div>
+                    <div class="trait-section"><h4>Advice for Future Work</h4><ul><li>If they are mainly engaged in routine work, must find opportunities for creative activities as well.</li><li>Must take advantage of opportunities to enhance their present skills, knowledge and experience.</li><li>Must be willing to volunteer to take the lead in projects.</li><li>Must congratulate oneself when they step out of their comfort zone as it will build their confidence.</li></ul></div>
+                    <div class="trait-section"><h4>Careers</h4><p>There is an important role for people who are moderate in Openness in most careers. The ability to pivot from creative thinking and new experiences to routine procedures and tasks gives a flexibility to thrive in most working environments from administration and management to creative design and software coding.</p></div>
+                </div>
+                <div id="tab-agreeableness" class="tab-content">
+                    <span class="trait-level">Moderate</span>
+                    <p class="trait-desc">Combines a balance of being agreeable and disagreeable, which means the talent is able to get on with others well but also to be more objective in relating to others when it is appropriate. Compliant - Kind - Trusting – Conciliatory – Considerate – Friendly - Generous - Helpful - Willingness to compromise to others’ interests - Optimistic view of people - Assertive – Sceptical – Confident - Honest.</p>
+                    <div class="trait-section"><h4>Strengths</h4><ul><li>Working with and getting on with other people.</li><li>Understanding other’s point of view.</li><li>Actively listening to others.</li><li>Collaborating with colleagues.</li></ul></div>
+                    <div class="trait-section"><h4>Vulnerabilities</h4><ul><li>To fail to express their views.</li><li>To fail to make objective tough decisions.</li><li>To hide what they really think.</li><li>To avoid conflict when it is appropriate.</li><li>To be weak in bargaining and negotiating for their own interests.</li></ul></div>
+                    <div class="trait-section"><h4>Advice for Future Work</h4><ul><li>Must consider careers that are associated with people.</li><li>Be prepared to express your views when not in agreement.</li><li>Value your ability to represent others who are high in agreeableness and have difficulty expressing themselves.</li></ul></div>
+                    <div class="trait-section"><h4>Careers</h4><p>Agreeableness is highly valued, especially in careers involving people, such as teaching and caring professions. It is a valuable trait in being part of a team and in leadership. Develop your weaker traits to widen your career choices.</p></div>
+                </div>
+                <div id="tab-conscientiousness" class="tab-content">
+                    <span class="trait-level high">High</span>
+                    <p class="trait-desc">Talent is strong in controlling and regulating his/her life and work. Dependability - Hard working - Self-efficacy - Orderliness - Dutifulness – Diligent Ambition - Striving for achievement - Sacrificing gratification for a goal - Self-discipline - Persistence.</p>
+                    <div class="trait-section"><h4>Strengths</h4><ul><li>Setting goals and striving to achieve them.</li><li>Organising themselves and others to achieve an objective.</li><li>Hard and challenging work.</li><li>Being considered reliable in a fast-paced environment.</li></ul></div>
+                    <div class="trait-section"><h4>Vulnerabilities</h4><ul><li>To be prone to stress and driven to achieve unreachable goals.</li><li>To place unrealistic demands on others around them, especially if they do not match your level of Conscientiousness.</li></ul></div>
+                    <div class="trait-section"><h4>Advice for Future Work</h4><ul><li>Must look for work that is challenging and allows them to aim for and achieve goals.</li><li>Be conscientious about taking breaks from work to do things they enjoy for their own sake.</li></ul></div>
+                    <div class="trait-section"><h4>Careers</h4><p>High Conscientiousness is valued in most careers and by most employers and is a valuable trait for recruitment and promotion. It is a characteristic that is valued in senior management in organisations, as well as a key trait in entrepreneurs.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalFow">
+        <div class="modal-content">
+            <div class="modal-header-area">
+                <span class="close-modal hoverable" onclick="closeModal('modalFow')">&times;</span>
+                <h3 class="modal-main-title">Future of Work</h3>
+                <div class="tab-menu-container" id="tabMenuFow">
+                    <div class="tab-menu">
+                        <button class="tab-btn active" onclick="switchTab(event, 'tab-fow-cog', 'tabMenuFow')">Cognitive</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-fow-inter', 'tabMenuFow')">Interpersonal</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-fow-self', 'tabMenuFow')">Self Leadership</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-fow-dig', 'tabMenuFow')">Digital</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body-area">
+                <div id="tab-fow-cog" class="tab-content active">
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Communication</span><span class="fow-list-badge" style="background: var(--aged-brass); color: var(--warm-white);">Moderate</span></div>
+                        <p class="fow-list-desc">Developing this skill will position the talent well to access opportunities in the world of work for the future. Being able to understand key messages and communicate them to others in ways that they can easily understand, listen well and understand the views of others are all important skills in the workplace. Asking the right questions so that the talent has all the information he/she needs when starting a new piece of work is also important. Being able to speak in public could be an important skill to acquire.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Critical Thinking</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions talents well to access exciting opportunities in the world of work for the future. Being able to solve problems using logical thinking, obtaining relevant information and having an awareness of the impact of cognitive biases is important in the modern workplace. Weighing up the advantages and disadvantages of a decision or course of action is also an important skill.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Mental Flexibility</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to use creativity and imagination to help solve problems or come up with new ideas, to use learning from one area and apply it to another area for positive results, to see a situation from many perspectives and to be open to new learning are all important skills in the workplace. To use these effectively, one should easily adapt to change.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Planning and Ways of Working</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to plan and prioritise one’s work efficiently to ensure its completion is important in the modern workplace. When starting a project, creating a plan to ensure that one stays on track, yet being flexible to switch tasks if required is also an important skill.</p>
+                    </div>
+                </div>
+                <div id="tab-fow-inter" class="tab-content">
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Coaching Others</span><span class="fow-list-badge" style="background: var(--aged-brass); color: var(--warm-white);">Moderate</span></div>
+                        <p class="fow-list-desc">Developing this skill will position the talent well to access opportunities in the world of work for the future. Being able to help others think about what they want to achieve, to empower them by helping them focus on their strengths, to help set goals for themselves and to facilitate the development of their skills and knowledge are all important coaching skills needed in the workplace today.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Developing Relationships</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to have empathy for others by putting oneself in their position to understand their point of view, build trusting relationship with others by being open, honest and supportive and demonstrate humility in one’s interactions with others are important skills in the workplace. Being sociable opens the way to building relationships with work colleagues or clients.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Effective Teamwork</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to work with a diverse group of people towards a common goal and ensure that they feel included and their views are heard is important in the workplace today. Getting to know people as individuals, understanding what motivates them and supporting them to resolve conflicts are significant skills for the workplace.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Mobilising Systems</span><span class="fow-list-badge" style="background: var(--aged-brass); color: var(--warm-white);">Moderate</span></div>
+                        <p class="fow-list-desc">Developing this skill will position the talent well to access opportunities in the world of work for the future. Being able to be a role model of positive behaviour, negotiating with others so that everyone feels that they have gained a positive result and creating an inspiring vision around a project or idea to build motivation and engagement in others are all important skills in the modern workplace. Gaining the information required to understand how organisations work and what is required of the talent is also significant.</p>
+                    </div>
+                </div>
+                <div id="tab-fow-self" class="tab-content">
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Entrepreneurship</span><span class="fow-list-badge" style="background: var(--aged-brass); color: var(--warm-white);">Moderate</span></div>
+                        <p class="fow-list-desc">Developing this skill will position the talent well to access opportunities in the world of work for the future. Being able to take appropriate risks, innovate, adapt to change and apply positive energy towards one’s work is important for one’s ability to secure employment, progress in his/her career and stay ahead of the competition.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Goal Achievement</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to take responsibility for setting and working towards one’s goals, persevering, especially during periods of uncertainty and committing to one’s professional development is important for his/her ability to secure employment and progress in his/her career.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Self-Awareness</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to understand one’s emotions, how they impact one and knowing how to calm oneself down when one is feeling stressed is important for his/her health, wellbeing, and his/her performance at work.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Self-Management</span><span class="fow-list-badge" style="background: var(--aged-brass); color: var(--warm-white);">Moderate</span></div>
+                        <p class="fow-list-desc">Developing this skill will position the talent well to access opportunities in the world of work for the future. Being able to look after one’s wellbeing, motivate oneself and make progress towards one’s goals is important for his/her ability to secure employment and progress in his/her career.</p>
+                    </div>
+                </div>
+                <div id="tab-fow-dig" class="tab-content">
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Digital Fluency</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to use technology and interact professionally in the digital world are important skills to some extent, in all careers in the future of work.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Software Development</span><span class="fow-list-badge" style="background: var(--aged-brass); color: var(--warm-white);">Moderate</span></div>
+                        <p class="fow-list-desc">Developing this skill will position the talent well to access opportunities in the world of work for the future. Being able to develop digital systems, understand and develop computer code and create digital programmes to solve problems are valuable assets if the talent sees digital skills as a core element of his/her chosen career.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Software Use</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to learn about, adapt to and integrate new software into one’s work, are important skills to some extent, in all careers in the future of work.</p>
+                    </div>
+                    <div class="fow-list-item">
+                        <div class="fow-list-header"><span class="fow-list-title">Understanding Digital Systems</span><span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span></div>
+                        <p class="fow-list-desc">This skill positions the talent well to access exciting opportunities in the world of work for the future. Being able to use, understand and develop digital systems, and use data to gain insights are valuable assets if the talent sees digital skills as a core element of his/her chosen career.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalLearning">
+        <div class="modal-content">
+            <div class="modal-header-area">
+                <span class="close-modal hoverable" onclick="closeModal('modalLearning')">&times;</span>
+                <h3 class="modal-main-title">Learning Style</h3>
+                <div class="tab-menu-container" id="tabMenuLearn">
+                    <div class="tab-menu">
+                        <button class="tab-btn active" onclick="switchTab(event, 'tab-learn-vk', 'tabMenuLearn')">Visual & Kinesthetic</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-learn-aural', 'tabMenuLearn')">Aural</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'tab-learn-rw', 'tabMenuLearn')">Read / Write</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body-area">
+                <div id="tab-learn-vk" class="tab-content active">
+                    <span class="trait-level high">High</span>
+                    <p class="trait-desc">Learners with a preference for the combined Visual and Kinesthetic style grasp concepts more effectively through direct interaction with learning materials. They thrive on engaging physically with tasks and benefit from the use of visual aids.</p>
+                    <div class="trait-section">
+                        <h4>Examples of Application</h4>
+                        <ul>
+                            <li>Engaging with interactive simulations and physical models.</li>
+                            <li>Using diagrams, flowcharts, and illustrative videos to understand complex concepts.</li>
+                            <li>Participating in workshops where they can physically manipulate relevant materials.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="tab-learn-aural" class="tab-content">
+                    <span class="trait-level">Moderate</span>
+                    <p class="trait-desc">Aural learners absorb information best when it is presented verbally. They excel in environments where listening and discussion are encouraged and are adept at remembering spoken instructions.</p>
+                    <div class="trait-section">
+                        <h4>Examples of Application</h4>
+                        <ul>
+                            <li>Benefiting from lectures, group discussions, and verbal briefings.</li>
+                            <li>Using podcasts and audio recordings for learning new content.</li>
+                            <li>Participating in study groups or team meetings where ideas are discussed aloud.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="tab-learn-rw" class="tab-content">
+                    <span class="trait-level high">High</span>
+                    <p class="trait-desc">Read / Write learners prefer to interact with information through written words. They excel in traditional study methods involving reading and taking detailed notes.</p>
+                    <div class="trait-section">
+                        <h4>Examples of Application</h4>
+                        <ul>
+                            <li>Using textbooks, articles, and written handouts as primary study materials.</li>
+                            <li>Making comprehensive lists, writing out notes, and summarizing information.</li>
+                            <li>Preferring email and text-based communication for clarity and record-keeping.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalCognitive">
+        <div class="modal-content">
+            <div class="modal-header-area">
+                <span class="close-modal hoverable" onclick="closeModal('modalCognitive')">&times;</span>
+                <h3 class="modal-main-title">Cognitive Ability Details</h3>
+                <div style="margin-bottom: 1.5rem;">
+                    <span class="trait-level high" style="font-size: 1rem; padding: 0.4rem 1.2rem;">OVERALL: HIGH</span>
+                </div>
+                <div style="border-bottom: 1px solid var(--old-library-brown);"></div>
+            </div>
+            
+            <div class="modal-body-area">
+                
+                <div class="fow-list-item">
+                    <div class="fow-list-header">
+                        <span class="fow-list-title">Quantitative Knowledge</span>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span>
+                            <span style="color: var(--antique-gold); font-weight: 600;">79.31%</span>
+                        </div>
+                    </div>
+                    <div class="cog-bar-bg" style="margin-bottom: 1rem;"><div class="cog-bar-fill" style="width: 79.31%;"></div></div>
+                    <p class="fow-list-desc">Have good ability to reason numerical concepts and relationships and to manipulate numerical symbols. Can solve all the problems related to: basic arithmetic, percentages, average, ratio and proportion, number sequences, graphs or tables, value comparison, combination problem.</p>
+                </div>
+
+                <div class="fow-list-item">
+                    <div class="fow-list-header">
+                        <span class="fow-list-title">Comprehensive Knowledge</span>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span>
+                            <span style="color: var(--antique-gold); font-weight: 600;">62.5%</span>
+                        </div>
+                    </div>
+                    <div class="cog-bar-bg" style="margin-bottom: 1rem;"><div class="cog-bar-fill" style="width: 62.5%;"></div></div>
+                    <p class="fow-list-desc">Have good acquired knowledge as well as ability to communicate knowledge and to reason using previously learned experiences or procedures. Can complete all the tasks related to: analogies, opposites, fill-in-the-blanks with the most appropriate words, general verbal information, language development, lexical knowledge, communication ability, grammatical sensitivity.</p>
+                </div>
+
+                <div class="fow-list-item">
+                    <div class="fow-list-header">
+                        <span class="fow-list-title">Visual Reasoning</span>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span>
+                            <span style="color: var(--antique-gold); font-weight: 600;">83.33%</span>
+                        </div>
+                    </div>
+                    <div class="cog-bar-bg" style="margin-bottom: 1rem;"><div class="cog-bar-fill" style="width: 83.33%;"></div></div>
+                    <p class="fow-list-desc">Have good ability to perceive, analyse and synthesize visual patterns and to think with visual patterns including the ability to store and recall visual representations. Can complete all the tasks related to: series completion with shapes or symbols, find the odd man out in a given set of shapes or symbols, visualization, rotation speed, closure speed, flexibility of closure, visual memory, spatial scanning, serial perceptual integration, length estimation, perceptual illusions, perceptual alternations, imagery.</p>
+                </div>
+
+                <div class="fow-list-item">
+                    <div class="fow-list-header">
+                        <span class="fow-list-title">Fluid Reasoning</span>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span class="fow-list-badge" style="background: var(--burgundy); color: var(--warm-white);">High</span>
+                            <span style="color: var(--antique-gold); font-weight: 600;">75%</span>
+                        </div>
+                    </div>
+                    <div class="cog-bar-bg" style="margin-bottom: 1rem;"><div class="cog-bar-fill" style="width: 75%;"></div></div>
+                    <p class="fow-list-desc">Have good ability to reason form concepts and solve problems using unfamiliar information or novel procedures. Can complete all the tasks related to: inductive reasoning, general sequential reasoning, Piagetian reasoning, quantitative reasoning, speed of reasoning.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Custom Cursor
+        const dot = document.getElementById('cursor-dot');
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = `${e.clientX}px`; dot.style.top = `${e.clientY}px`;
+        });
+        const hoverables = document.querySelectorAll('.hoverable, a, button');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(3.5)';
+                dot.style.backgroundColor = 'rgba(198, 169, 105, 0.4)';
+            });
+            el.addEventListener('mouseleave', () => {
+                dot.style.transform = 'translate(-50%, -50%) scale(1)';
+                dot.style.backgroundColor = 'var(--antique-gold)';
+            });
+        });
+
+        // Universal Tab Logic
+        function switchTab(evt, tabId, containerId) {
+            const container = document.getElementById(containerId).closest('.modal-content');
+            
+            const tabContents = container.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            const tabBtns = container.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // --- JS FOR MOUSE DRAG TO SCROLL (DESKTOP) ---
+        function attachDragToScroll(sliderId) {
+            const slider = document.getElementById(sliderId);
+            if(!slider) return;
+            
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+            slider.addEventListener('mouseleave', () => { isDown = false; });
+            slider.addEventListener('mouseup', () => { isDown = false; });
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2; 
+                slider.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        attachDragToScroll('tabMenuPers');
+        attachDragToScroll('tabMenuFow');
+        attachDragToScroll('tabMenuLearn');
+
+        // Open/Close Modals
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close when clicking outside content box
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
