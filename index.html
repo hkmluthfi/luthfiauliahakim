@@ -1,157 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luthfi Aulia Hakim | Home</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luthfi Aulia Hakim — Geodesy, Geomatics & GIS</title>
+  <meta name="description" content="Portfolio of Luthfi Aulia Hakim — Geodesy & Geomatics Engineering graduate from Institut Teknologi Bandung. GIS Analyst, Remote Sensing, Spatial Analysis." />
+  <meta property="og:title" content="Luthfi Aulia Hakim — Geodesy, Geomatics & GIS" />
+  <meta property="og:description" content="A private archive of spatial works by Luthfi Aulia Hakim." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0D0D0C" />
 
-    <style>
-        :root {
-            --deep-coffee: #1E1B18;
-            --dark-walnut: #2C2621;
-            --old-library-brown: #3A322C;
-            --antique-gold: #C6A969;
-            --aged-brass: #B89A5A;
-            --vintage-beige: #E6D5B8;
-            --dusty-parchment: #F1E6D0;
-            --burgundy: #7A2E2E;
-            --warm-white: #F5F5F5;
-            --soft-beige: #E8E0D0;
-            --muted-gray: #A8A29E;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        body {
-            background-color: var(--deep-coffee);
-            color: var(--soft-beige);
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; 
-        }
-        h1, .logo { font-family: 'Playfair Display', serif; color: var(--warm-white); }
-        a { text-decoration: none; color: inherit; }
-
-        /* --- SIMPLIFIED CUSTOM CURSOR --- */
-        .cursor-dot {
-            width: 12px; height: 12px; background-color: var(--antique-gold);
-            border-radius: 50%; position: fixed; top: 0; left: 0;
-            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
-            transition: transform 0.25s ease, background-color 0.25s ease;
-        }
-
-        /* --- NAVIGATION --- */
-        header {
-            position: fixed; top: 0; width: 100%; padding: 2rem 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-        }
-        .logo { font-size: 1.5rem; color: var(--antique-gold); letter-spacing: 1px; }
-        nav ul { list-style: none; display: flex; gap: 1.5rem; }
-        nav ul li a {
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;
-            color: var(--vintage-beige); position: relative; padding-bottom: 5px;
-        }
-        nav ul li a::after {
-            content: ''; position: absolute; width: 0; height: 1px;
-            bottom: 0; left: 0; background-color: var(--antique-gold); transition: width 0.3s ease;
-        }
-        nav ul li a:hover { color: var(--antique-gold); }
-        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
-
-        /* --- HERO --- */
-        .hero {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            padding: 0 5%; animation: fadeIn 1.5s ease-out forwards;
-        }
-        .greeting { font-size: 1rem; color: var(--vintage-beige); text-transform: uppercase; margin-bottom: 1rem; }
-        .hero h1 { font-size: 4.5rem; margin-bottom: 1rem; }
-        .hero h1 span { color: var(--antique-gold); font-style: italic; }
-        .typewriter-container { font-size: 1.2rem; color: var(--muted-gray); margin-bottom: 2.5rem; height: 30px; }
-        .typing-text { color: var(--dusty-parchment); border-right: 2px solid var(--antique-gold); padding-right: 5px; }
-
-        .btn-group { display: flex; gap: 1.5rem; }
-        .btn { padding: 0.8rem 2rem; font-size: 0.9rem; text-transform: uppercase; border-radius: 2px; transition: all 0.3s; }
-        .btn-primary { background-color: var(--antique-gold); color: var(--deep-coffee); }
-        .btn-primary:hover { background-color: var(--aged-brass); box-shadow: 0 4px 15px rgba(198, 169, 105, 0.2); }
-        .btn-secondary { background-color: transparent; color: var(--vintage-beige); border: 1px solid var(--vintage-beige); }
-        .btn-secondary:hover { border-color: var(--antique-gold); color: var(--antique-gold); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="cursor-dot" id="cursor-dot"></div>
 
-    <header>
-        <div class="logo">LAH.</div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active hoverable">Home</a></li>
-                <li><a href="about.html" class="hoverable">About</a></li>
-                <li><a href="skills.html" class="hoverable">Skills</a></li>
-                <li><a href="experiences.html" class="hoverable">Experience</a></li>
-                <li><a href="certifications.html" class="hoverable">Certifications</a></li>
-                <li><a href="assessment.html" class="hoverable">Assessment</a></li>
-                <li><a href="contact.html" class="hoverable">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- ═══════════════════════════════════════════════
+       NOISE OVERLAY
+  ═══════════════════════════════════════════════ -->
+  <canvas id="noise-canvas" class="noise-canvas" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
 
-    <main>
-        <section class="hero">
-            <p class="greeting">Welcome</p>
-            <h1>I am <span>Luthfi Aulia Hakim</span></h1>
-            <div class="typewriter-container">
-                I am a <span class="typing-text"></span>
+  <!-- ═══════════════════════════════════════════════
+       CUSTOM CURSOR
+  ═══════════════════════════════════════════════ -->
+  <div id="cursor" class="cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-label" id="cursor-label"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       LOADING SCREEN
+  ═══════════════════════════════════════════════ -->
+  <div id="loading" class="loading" role="progressbar" aria-label="Loading archive">
+    <canvas id="compass-canvas" class="compass-canvas" aria-hidden="true"></canvas>
+    <div class="loading-content">
+      <div class="loading-status" id="loading-status">CALIBRATING COORDINATES</div>
+      <div class="loading-coords" id="loading-coords">
+        <span class="coord-line" id="coord-lat">06°10′31″S</span>
+        <span class="coord-line" id="coord-lon">106°49′37″E</span>
+      </div>
+      <div class="loading-name" id="loading-name">
+        <span>LUTHFI AULIA HAKIM</span>
+      </div>
+      <div class="loading-discipline" id="loading-discipline">GEODESY · GEOMATICS · GIS</div>
+      <div class="loading-bar-wrap">
+        <div class="loading-bar" id="loading-bar"></div>
+      </div>
+    </div>
+    <div class="loading-footnote" id="loading-footnote">INITIALIZING ARCHIVE…</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════ -->
+  <nav id="nav" class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Home">
+        <span class="nav-logo-text">LAH</span>
+        <span class="nav-logo-sub">48S · SRGI2013</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links" role="menubar">
+        <li role="none"><a href="#about"   class="nav-link" data-section="about"   role="menuitem"><span class="nav-num">01</span><span class="nav-text">About</span></a></li>
+        <li role="none"><a href="#experience" class="nav-link" data-section="experience" role="menuitem"><span class="nav-num">02</span><span class="nav-text">Experience</span></a></li>
+        <li role="none"><a href="#projects" class="nav-link" data-section="projects" role="menuitem"><span class="nav-num">03</span><span class="nav-text">Field Works</span></a></li>
+        <li role="none"><a href="#instruments" class="nav-link" data-section="instruments" role="menuitem"><span class="nav-num">04</span><span class="nav-text">Instruments</span></a></li>
+        <li role="none"><a href="#archive"  class="nav-link" data-section="archive"  role="menuitem"><span class="nav-num">05</span><span class="nav-text">Archive</span></a></li>
+        <li role="none"><a href="#contact"  class="nav-link" data-section="contact"  role="menuitem"><span class="nav-num">06</span><span class="nav-text">Contact</span></a></li>
+      </ul>
+
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile full-screen menu -->
+    <div class="nav-mobile-menu" id="nav-mobile-menu" role="dialog" aria-label="Navigation menu" aria-modal="true">
+      <div class="nav-mobile-inner">
+        <ul class="nav-mobile-links">
+          <li><a href="#about"       class="nav-mobile-link" data-section="about">       <em>01</em> About</a></li>
+          <li><a href="#experience"  class="nav-mobile-link" data-section="experience">  <em>02</em> Experience</a></li>
+          <li><a href="#projects"    class="nav-mobile-link" data-section="projects">    <em>03</em> Field Works</a></li>
+          <li><a href="#instruments" class="nav-mobile-link" data-section="instruments"> <em>04</em> Instruments</a></li>
+          <li><a href="#archive"     class="nav-mobile-link" data-section="archive">     <em>05</em> Archive</a></li>
+          <li><a href="#contact"     class="nav-mobile-link" data-section="contact">     <em>06</em> Contact</a></li>
+        </ul>
+        <div class="nav-mobile-coords">06°10′31″S · 106°49′37″E</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Progress line -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN
+  ═══════════════════════════════════════════════ -->
+  <main id="main">
+
+    <!-- ══════════════════ HERO ══════════════════ -->
+    <section id="hero" class="hero" aria-labelledby="hero-name">
+      <!-- Background map fragment -->
+      <div class="hero-map-bg" aria-hidden="true">
+        <svg class="hero-contours" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <g fill="none" stroke="#B59A63" opacity="0.06" stroke-width="0.8">
+            <ellipse cx="700" cy="450" rx="680" ry="300"/>
+            <ellipse cx="700" cy="450" rx="620" ry="265"/>
+            <ellipse cx="700" cy="450" rx="560" ry="230"/>
+            <ellipse cx="700" cy="450" rx="500" ry="195"/>
+            <ellipse cx="700" cy="450" rx="440" ry="162"/>
+            <ellipse cx="700" cy="450" rx="380" ry="130"/>
+            <ellipse cx="700" cy="450" rx="320" ry="100"/>
+            <ellipse cx="700" cy="450" rx="260" ry="74"/>
+            <ellipse cx="700" cy="450" rx="200" ry="52"/>
+            <ellipse cx="700" cy="450" rx="140" ry="34"/>
+            <ellipse cx="700" cy="450" rx="80" ry="20"/>
+            <ellipse cx="700" cy="450" rx="730" ry="320" transform="rotate(12 700 450)"/>
+            <ellipse cx="680" cy="430" rx="580" ry="240" transform="rotate(-8 680 430)"/>
+            <ellipse cx="720" cy="470" rx="490" ry="200" transform="rotate(5 720 470)"/>
+          </g>
+          <!-- Grid lines -->
+          <g stroke="#B59A63" opacity="0.04" stroke-width="0.5">
+            <line x1="0" y1="150" x2="1400" y2="150"/>
+            <line x1="0" y1="300" x2="1400" y2="300"/>
+            <line x1="0" y1="450" x2="1400" y2="450"/>
+            <line x1="0" y1="600" x2="1400" y2="600"/>
+            <line x1="0" y1="750" x2="1400" y2="750"/>
+            <line x1="233" y1="0" x2="233" y2="900"/>
+            <line x1="466" y1="0" x2="466" y2="900"/>
+            <line x1="700" y1="0" x2="700" y2="900"/>
+            <line x1="933" y1="0" x2="933" y2="900"/>
+            <line x1="1166" y1="0" x2="1166" y2="900"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Grain overlay for hero image area -->
+      <div class="hero-image-panel" aria-hidden="true">
+        <div class="hero-image-content">
+          <svg class="hero-img-svg" viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="heroGrad" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#2A2218" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#0D0D0C" stop-opacity="1"/>
+              </radialGradient>
+            </defs>
+            <rect width="600" height="800" fill="url(#heroGrad)"/>
+            <!-- Surveying crosshair -->
+            <g stroke="#B59A63" stroke-width="0.6" opacity="0.35" fill="none">
+              <circle cx="300" cy="320" r="120"/>
+              <circle cx="300" cy="320" r="80"/>
+              <circle cx="300" cy="320" r="40"/>
+              <line x1="300" y1="160" x2="300" y2="200"/>
+              <line x1="300" y1="440" x2="300" y2="480"/>
+              <line x1="140" y1="320" x2="180" y2="320"/>
+              <line x1="420" y1="320" x2="460" y2="320"/>
+              <!-- Tick marks -->
+              <line x1="300" y1="201" x2="300" y2="215"/>
+              <line x1="300" y1="425" x2="300" y2="439"/>
+              <line x1="185" y1="320" x2="200" y2="320"/>
+              <line x1="400" y1="320" x2="415" y2="320"/>
+              <!-- Cardinal labels -->
+            </g>
+            <!-- Topographic elevation lines -->
+            <g fill="none" stroke="#B59A63" stroke-width="0.5" opacity="0.2">
+              <ellipse cx="300" cy="320" rx="180" ry="70" transform="rotate(-15 300 320)"/>
+              <ellipse cx="300" cy="320" rx="150" ry="58" transform="rotate(-15 300 320)"/>
+              <ellipse cx="300" cy="320" rx="120" ry="46" transform="rotate(-15 300 320)"/>
+              <ellipse cx="300" cy="320" rx="90" ry="34" transform="rotate(-15 300 320)"/>
+              <ellipse cx="300" cy="320" rx="60" ry="22" transform="rotate(-15 300 320)"/>
+            </g>
+            <!-- Corner markers -->
+            <g stroke="#B59A63" stroke-width="0.7" opacity="0.3">
+              <path d="M20,20 L50,20 L50,22 L22,22 L22,50 L20,50 Z"/>
+              <path d="M580,20 L550,20 L550,22 L578,22 L578,50 L580,50 Z"/>
+              <path d="M20,780 L50,780 L50,778 L22,778 L22,750 L20,750 Z"/>
+              <path d="M580,780 L550,780 L550,778 L578,778 L578,750 L580,750 Z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Hero text content -->
+      <div class="hero-content">
+        <div class="hero-meta reveal-item" data-delay="0">
+          <span class="meta-rule"></span>
+          <span class="meta-text">GEODESY &amp; GEOMATICS ENGINEERING</span>
+          <span class="meta-text">INSTITUT TEKNOLOGI BANDUNG</span>
+        </div>
+
+        <h1 class="hero-name" id="hero-name">
+          <span class="hero-name-line reveal-item" data-delay="1">LUTHFI</span>
+          <span class="hero-name-line reveal-item" data-delay="2">AULIA</span>
+          <span class="hero-name-line reveal-item" data-delay="3">HAKIM<em class="hero-name-period">.</em></span>
+        </h1>
+
+        <p class="hero-statement reveal-item" data-delay="4">
+          Mapping the Earth,<br /><em>Understanding the Data.</em>
+        </p>
+
+        <div class="hero-tags reveal-item" data-delay="5">
+          <span>GIS</span>
+          <span class="tag-sep">·</span>
+          <span>REMOTE SENSING</span>
+          <span class="tag-sep">·</span>
+          <span>SURVEYING</span>
+          <span class="tag-sep">·</span>
+          <span>SPATIAL ANALYSIS</span>
+        </div>
+      </div>
+
+      <div class="hero-scroll-cue reveal-item" data-delay="6" aria-hidden="true">
+        <div class="scroll-line"></div>
+        <span>SCROLL TO EXPLORE</span>
+      </div>
+
+      <!-- Coordinate markers -->
+      <div class="hero-coord-tl" aria-hidden="true">
+        <span class="coord-mono">N 06°10′31″</span>
+        <span class="coord-mono">E 106°49′37″</span>
+      </div>
+      <div class="hero-coord-br" aria-hidden="true">
+        <span class="coord-mono">SCALE 1:50,000</span>
+        <span class="coord-mono">UTM 48S · WGS84</span>
+      </div>
+    </section>
+
+    <!-- ══════════════════ ABOUT ══════════════════ -->
+    <section id="about" class="section about-section" aria-labelledby="about-heading">
+      <div class="section-container">
+        <div class="section-label-row reveal-item" data-delay="0">
+          <span class="section-num">01</span>
+          <span class="section-rule"></span>
+          <span class="section-label">THE CARTOGRAPHER</span>
+        </div>
+
+        <div class="about-grid">
+          <!-- Portrait -->
+          <div class="about-portrait reveal-item" data-delay="1">
+            <div class="portrait-frame">
+              <div class="portrait-inner">
+                <svg class="portrait-svg" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="portGrad" cx="50%" cy="35%" r="60%">
+                      <stop offset="0%" stop-color="#2A2218"/>
+                      <stop offset="100%" stop-color="#0D0D0C"/>
+                    </radialGradient>
+                  </defs>
+                  <rect width="300" height="380" fill="url(#portGrad)"/>
+                  <g fill="none" stroke="#B59A63" stroke-width="0.5" opacity="0.25">
+                    <ellipse cx="150" cy="190" rx="130" ry="55" transform="rotate(-10 150 190)"/>
+                    <ellipse cx="150" cy="190" rx="100" ry="42" transform="rotate(-10 150 190)"/>
+                    <ellipse cx="150" cy="190" rx="70"  ry="30" transform="rotate(-10 150 190)"/>
+                    <ellipse cx="150" cy="190" rx="40"  ry="18" transform="rotate(-10 150 190)"/>
+                  </g>
+                  <text x="150" y="185" text-anchor="middle" fill="#B59A63" font-family="Cormorant Garamond" font-size="48" opacity="0.5" dy="0.35em" font-style="italic">LAH</text>
+                  <g stroke="#B59A63" stroke-width="0.5" opacity="0.3">
+                    <path d="M8,8 L32,8 L32,10 L10,10 L10,32 L8,32 Z"/>
+                    <path d="M292,8 L268,8 L268,10 L290,10 L290,32 L292,32 Z"/>
+                    <path d="M8,372 L32,372 L32,370 L10,370 L10,348 L8,348 Z"/>
+                    <path d="M292,372 L268,372 L268,370 L290,370 L290,348 L292,348 Z"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="portrait-caption">
+                <span>LUTHFI AULIA HAKIM</span>
+                <span>GEODESY &amp; GEOMATICS</span>
+              </div>
             </div>
-            <div class="btn-group">
-                <a href="experiences.html" class="btn btn-primary hoverable">View Experiences</a>
-                <a href="contact.html" class="btn btn-secondary hoverable">Contact Me</a>
+          </div>
+
+          <!-- Bio -->
+          <div class="about-bio">
+            <h2 class="section-title reveal-item" data-delay="2" id="about-heading">
+              About the Author
+            </h2>
+
+            <div class="about-text reveal-item" data-delay="3">
+              <p>
+                A geodesy and geomatics engineer shaped by the rigour of Institut Teknologi Bandung — 
+                trained to read the earth not merely as terrain, but as a system of relationships: 
+                spatial, temporal, and analytical. The work lives at the intersection of classical 
+                surveying discipline and contemporary geospatial technology.
+              </p>
+              <p>
+                The interest is not in maps as objects, but in what they reveal: patterns of risk, 
+                infrastructure vulnerability, resource distribution, and the quiet geometry underlying 
+                every human settlement. GIS is the language; spatial analysis is the method; 
+                precision is the obligation.
+              </p>
+              <p>
+                Open to opportunities in GIS analysis, geospatial engineering, remote sensing, 
+                disaster risk assessment, infrastructure mapping, and the energy sector — wherever 
+                spatial thinking is an asset.
+              </p>
             </div>
-        </section>
-    </main>
 
-    <script>
-        // Simplified Cursor Logic
-        const dot = document.getElementById('cursor-dot');
-        const hoverables = document.querySelectorAll('.hoverable, a, .btn');
+            <!-- Field Notes card -->
+            <div class="field-notes reveal-item" data-delay="4">
+              <div class="field-notes-header">
+                <span class="fn-rule"></span>
+                <span class="fn-title">FIELD NOTES</span>
+                <span class="fn-rule"></span>
+              </div>
+              <div class="fn-grid" id="about-field-notes">
+                <!-- JS populated -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        window.addEventListener('mousemove', (e) => {
-            dot.style.left = `${e.clientX}px`; 
-            dot.style.top = `${e.clientY}px`;
-        });
+    <!-- ══════════════════ EXPERIENCE ══════════════════ -->
+    <section id="experience" class="section experience-section" aria-labelledby="exp-heading">
+      <div class="section-container">
+        <div class="section-label-row reveal-item" data-delay="0">
+          <span class="section-num">02</span>
+          <span class="section-rule"></span>
+          <span class="section-label">FIELD RECORDS</span>
+        </div>
+        <h2 class="section-title reveal-item" data-delay="1" id="exp-heading">Experience</h2>
 
-        hoverables.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                dot.style.transform = 'translate(-50%, -50%) scale(3.5)';
-                dot.style.backgroundColor = 'rgba(198, 169, 105, 0.4)';
-            });
-            el.addEventListener('mouseleave', () => {
-                dot.style.transform = 'translate(-50%, -50%) scale(1)';
-                dot.style.backgroundColor = 'var(--antique-gold)';
-            });
-        });
+        <div class="timeline" id="experience-timeline">
+          <!-- JS populated -->
+        </div>
+      </div>
+    </section>
 
-        // Typewriter Effect
-        const typingText = document.querySelector('.typing-text');
-        const words = ['Geodesy & Geomatics Student', 'GIS & Project Management Enthusiast', 'Passionate Learner', 'Quiet Observer', 'Curious Person About the Banking Industry', ];
-        let wordIdx = 0, charIdx = 0, isDel = false;
+    <!-- ══════════════════ PROJECTS ══════════════════ -->
+    <section id="projects" class="section projects-section" aria-labelledby="proj-heading">
+      <div class="section-container">
+        <div class="section-label-row reveal-item" data-delay="0">
+          <span class="section-num">03</span>
+          <span class="section-rule"></span>
+          <span class="section-label">FIELD WORKS</span>
+        </div>
+        <h2 class="section-title reveal-item" data-delay="1" id="proj-heading">Projects</h2>
+      </div>
 
-        function type() {
-            const current = words[wordIdx];
-            typingText.textContent = isDel ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
-            charIdx = isDel ? charIdx - 1 : charIdx + 1;
-            let speed = isDel ? 50 : 100;
+      <div class="projects-grid" id="projects-grid">
+        <!-- JS populated -->
+      </div>
+    </section>
 
-            if (!isDel && charIdx === current.length) { isDel = true; speed = 2000; }
-            else if (isDel && charIdx === 0) { isDel = false; wordIdx = (wordIdx + 1) % words.length; speed = 500; }
-            setTimeout(type, speed);
-        }
-        document.addEventListener('DOMContentLoaded', () => setTimeout(type, 1000));
-    </script>
+    <!-- ══════════════════ INSTRUMENTS ══════════════════ -->
+    <section id="instruments" class="section instruments-section" aria-labelledby="inst-heading">
+      <div class="section-container">
+        <div class="section-label-row reveal-item" data-delay="0">
+          <span class="section-num">04</span>
+          <span class="section-rule"></span>
+          <span class="section-label">FIELD EQUIPMENT</span>
+        </div>
+        <h2 class="section-title reveal-item" data-delay="1" id="inst-heading">Instruments</h2>
+        <p class="section-sub reveal-item" data-delay="2">A catalogue of technical instruments and methodologies employed in the field and laboratory.</p>
+
+        <div class="instruments-categories" id="instruments-categories">
+          <!-- JS populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ ARCHIVE ══════════════════ -->
+    <section id="archive" class="section archive-section" aria-labelledby="arch-heading">
+      <div class="section-container">
+        <div class="section-label-row reveal-item" data-delay="0">
+          <span class="section-num">05</span>
+          <span class="section-rule"></span>
+          <span class="section-label">CREDENTIALS</span>
+        </div>
+        <h2 class="section-title reveal-item" data-delay="1" id="arch-heading">The Archive</h2>
+        <p class="section-sub reveal-item" data-delay="2">Certificates, credentials, and academic documents.</p>
+
+        <!-- Filters -->
+        <div class="archive-filters reveal-item" data-delay="3" role="group" aria-label="Filter certificates">
+          <button class="arch-filter active" data-filter="all">ALL</button>
+          <button class="arch-filter" data-filter="gis">GIS</button>
+          <button class="arch-filter" data-filter="remote-sensing">REMOTE SENSING</button>
+          <button class="arch-filter" data-filter="data">DATA</button>
+          <button class="arch-filter" data-filter="other">OTHER</button>
+        </div>
+
+        <div class="archive-grid" id="archive-grid">
+          <!-- JS populated -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ CONTACT ══════════════════ -->
+    <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
+      <div class="section-container">
+        <div class="section-label-row reveal-item" data-delay="0">
+          <span class="section-num">06</span>
+          <span class="section-rule"></span>
+          <span class="section-label">CORRESPONDENCE</span>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-left">
+            <h2 class="contact-heading reveal-item" data-delay="1" id="contact-heading">
+              Let Us Draw<br />the Next<br /><em>Map.</em>
+            </h2>
+            <p class="contact-sub reveal-item" data-delay="2">
+              Open to new field assignments, collaborative research, and professional opportunities. 
+              Send a transmission below.
+            </p>
+            <div class="contact-coords reveal-item" data-delay="3">
+              <span class="coord-mono">06°10′31″S · 106°49′37″E</span>
+              <span class="coord-mono">BANDUNG, INDONESIA</span>
+            </div>
+            <div class="contact-links reveal-item" data-delay="4">
+              <a href="mailto:luthfi.aulia.hakim@gmail.com" class="contact-link" id="cl-email" aria-label="Email">
+                <span class="cl-label">EMAIL</span>
+                <span class="cl-value">luthfi.aulia.hakim@gmail.com</span>
+              </a>
+              <a href="https://linkedin.com/in/luthfi-aulia-hakim" class="contact-link" id="cl-linkedin" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <span class="cl-label">LINKEDIN</span>
+                <span class="cl-value">luthfi-aulia-hakim</span>
+              </a>
+              <a href="https://github.com/luthfiaulia" class="contact-link" id="cl-github" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                <span class="cl-label">GITHUB</span>
+                <span class="cl-value">luthfiaulia</span>
+              </a>
+              <a href="#" class="contact-link" id="cl-cv" aria-label="Download CV">
+                <span class="cl-label">CURRICULUM VITAE</span>
+                <span class="cl-value">Download PDF ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-form-col reveal-item" data-delay="2">
+            <form class="contact-form" id="contact-form" novalidate aria-label="Contact form">
+              <div class="form-rule">OPEN A NEW FIELD NOTE</div>
+              <div class="form-group">
+                <label class="form-label" for="form-name">NAME</label>
+                <input class="form-input" type="text" id="form-name" name="name" autocomplete="name" placeholder="Your full name" aria-required="true" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="form-email">EMAIL</label>
+                <input class="form-input" type="email" id="form-email" name="email" autocomplete="email" placeholder="your@email.com" aria-required="true" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="form-message">MESSAGE</label>
+                <textarea class="form-input form-textarea" id="form-message" name="message" rows="5" placeholder="Your message…" aria-required="true"></textarea>
+              </div>
+              <button type="submit" class="form-submit" id="form-submit">
+                <span>TRANSMIT MESSAGE</span>
+                <span class="submit-arrow">→</span>
+              </button>
+              <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-compass" aria-hidden="true">
+        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+          <circle cx="30" cy="30" r="28" stroke="#B59A63" stroke-width="0.7" fill="none" opacity="0.5"/>
+          <circle cx="30" cy="30" r="20" stroke="#B59A63" stroke-width="0.4" fill="none" opacity="0.35"/>
+          <line x1="30" y1="2" x2="30" y2="10" stroke="#B59A63" stroke-width="0.7" opacity="0.6"/>
+          <line x1="30" y1="50" x2="30" y2="58" stroke="#B59A63" stroke-width="0.7" opacity="0.6"/>
+          <line x1="2" y1="30" x2="10" y2="30" stroke="#B59A63" stroke-width="0.7" opacity="0.6"/>
+          <line x1="50" y1="30" x2="58" y2="30" stroke="#B59A63" stroke-width="0.7" opacity="0.6"/>
+          <polygon points="30,10 27,30 30,26 33,30" fill="#B59A63" opacity="0.8"/>
+          <polygon points="30,50 27,30 30,34 33,30" fill="#918B7E" opacity="0.5"/>
+          <circle cx="30" cy="30" r="2" fill="#B59A63" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="footer-text">
+        <div class="footer-name">LUTHFI AULIA HAKIM</div>
+        <div class="footer-discipline">GEODESY &amp; GEOMATICS ENGINEERING</div>
+        <div class="footer-tags">GIS · MAPPING · SPATIAL DATA</div>
+      </div>
+      <div class="footer-end">
+        <div class="footer-eor">
+          <div class="eor-line"></div>
+          <span>END OF RECORD</span>
+          <div class="eor-line"></div>
+        </div>
+        <div class="footer-copy">© 2026</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════
+       PROJECT MODAL
+  ═══════════════════════════════════════════════ -->
+  <div id="project-modal" class="project-modal" role="dialog" aria-modal="true" aria-label="Project detail" aria-hidden="true">
+    <button class="modal-close" id="modal-close" aria-label="Close project">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.2"/><line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.2"/></svg>
+    </button>
+    <div class="modal-inner" id="modal-inner"></div>
+  </div>
+  <div class="modal-overlay" id="modal-overlay" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
